@@ -14,6 +14,8 @@ import { InputIconModule } from 'primeng/inputicon';
 import { FileUploadModule } from 'primeng/fileupload';
 import { AvatarModule } from 'primeng/avatar';
 
+import { Auth as AuthService } from '../../../services/auth/auth';
+
 @Component({
   selector: 'app-register',
   standalone: true,
@@ -44,7 +46,8 @@ export class Register {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private auth: AuthService,
   ) {
     this.initializeForm();
   }
@@ -66,10 +69,9 @@ export class Register {
 
   onFileSelected(event: any) {
     const file: File = event.files[0];
-    
+
     if (!file) return;
 
-    // Validate file type
     if (!file.type.startsWith('image/')) {
       this.messageService.add({
         severity: 'error',
@@ -79,7 +81,6 @@ export class Register {
       return;
     }
 
-    // Validate file size (max 5MB)
     if (file.size > 5 * 1024 * 1024) {
       this.messageService.add({
         severity: 'error',
@@ -117,59 +118,43 @@ export class Register {
     try {
       const formValue = this.registrationForm.value;
 
-      // Check if user already exists
-      const saved = localStorage.getItem('registeredUsers');
-      const registeredUsers = saved ? JSON.parse(saved) : [];
-      
-      if (registeredUsers.some((user: any) => user.username === formValue.username)) {
-        this.messageService.add({
-          severity: 'error',
-          summary: 'Error',
-          detail: 'Username already exists'
-        });
-        this.isProcessing = false;
-        return;
-      }
-
-      // Mock MongoDB document structure with profile image
-      const newUser = {
-        _id: this.generateMockId(),
+      const payload = {
         username: formValue.username,
         email: formValue.email,
         password: formValue.password,
-        profileImage: this.profileImageBase64 || null,
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString()
+        name: formValue.username,
+        role: 'user',
+        // profileImage: this.profileImageBase64,
       };
 
-      // Save to localStorage (mock DB for now)
-      registeredUsers.push(newUser);
-      localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+      console.log('🟢 Sending register payload to backend:', payload);
+
+      const result = await this.auth.register(payload);
+      console.log('🟢 Register response from backend:', result);
 
       this.messageService.add({
         severity: 'success',
         summary: 'Success',
-        detail: 'Account registered successfully!'
+        detail: result?.message || 'Account registered successfully!'
       });
 
       setTimeout(() => {
         this.router.navigate(['/auth/login']);
-      }, 2000);
+      }, 1500);
 
-    } catch (error) {
+    } catch (error: any) {
       console.error('Registration failed:', error);
+
+      const msg = error?.error?.message || 'Registration failed. Please try again.';
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Registration failed. Please try again.'
+        detail: msg
       });
+
     } finally {
       this.isProcessing = false;
     }
-  }
-
-  private generateMockId(): string {
-    return 'user_' + Math.random().toString(36).substr(2, 9);
   }
 
   goToLogin() {

@@ -10,14 +10,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class App implements OnInit {
 
-  // inject HttpClient in a standalone component
   private http = inject(HttpClient);
 
   ngOnInit() {
     const element = document.querySelector('html') as HTMLElement;
     element.classList.toggle('my-app-dark');
 
-    // Test backend connection
     this.http.get('http://localhost:3000', { responseType: 'text' }).subscribe({
       next: (response) => {
         console.log('✅ Backend connected successfully!', response);
