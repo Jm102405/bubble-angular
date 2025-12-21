@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+@use "nunito.scss";
+
+@use "primeflex/primeflex.scss";
+@use "primeflex/themes/primeone-light.css";
+@use "primeicons/primeicons.css";
+
+* {
+  font-family: 'Nunito', sans-serif;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}

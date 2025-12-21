@@ -1,0 +1,15 @@
+<div class="layout-wrapper">
+  <aside class="desktop-sidebar surface-50" [class.collapsed]="!isSidebarVisible">
+    <app-sidebar (onClickGenerate)="generate()"></app-sidebar>
+  </aside>
+  <p-drawer class="mobile-drawer" [(visible)]="isMobileDrawerVisible" [modal]="true" [baseZIndex]="10000">
+    <app-sidebar (onClickGenerate)="generate()"></app-sidebar>
+  </p-drawer>
+
+  <main class="main-content" [class.shifted]="isSidebarVisible && !isMobile">
+    <app-header (onToggleSidebar)="toggleSidebar()"></app-header>
+    <div class="p-4">
+      <router-outlet />
+    </div>
+  </main>
+</div>

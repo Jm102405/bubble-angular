@@ -1,0 +1,144 @@
+<div class="register-container">
+  <p-toast></p-toast>
+  
+  <p-card class="register-card" header="Create Your Account">
+    <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+      
+        <!-- Profile Image Upload -->
+      <div class="mb-4 text-center">
+        <label class="block text-sm font-semibold mb-2">Profile Picture</label>
+        <div class="mb-3">
+          <p-avatar 
+            *ngIf="profileImagePreview"
+            [image]="profileImagePreview"
+            size="xlarge"
+            shape="circle"
+            class="mb-2"
+          ></p-avatar>
+          <p-avatar 
+            *ngIf="!profileImagePreview"
+            icon="pi pi-user"
+            size="xlarge"
+            shape="circle"
+            styleClass="bg-gray-300"
+          ></p-avatar>
+        </div>
+        <p-fileUpload 
+          name="profileImage"
+          [multiple]="false"
+          accept="image/*"
+          [maxFileSize]="5242880"
+          (onSelect)="onFileSelected($event)"
+          [showUploadButton]="false"
+          [showCancelButton]="false"
+          [auto]="false"
+          chooseLabel="Choose Image"
+          class="mb-2"
+        ></p-fileUpload>
+        <button 
+          *ngIf="profileImagePreview"
+          pButton 
+          type="button" 
+          label="Remove Image"
+          severity="danger"
+          size="small"
+          (click)="removeProfileImage()"
+          class="mt-2"
+        ></button>
+      </div>
+      
+      <!-- Username -->
+      <div class="mb-4">
+        <label for="username" class="block text-sm font-semibold mb-2">Username</label>
+        <p-iconField iconPosition="left">
+          <i class="pi pi-user"></i>
+          <input 
+            pInputText 
+            id="username" 
+            formControlName="username"
+            placeholder="Enter username"
+            class="w-full"
+            [class.ng-invalid]="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched"
+          />
+        </p-iconField>
+        <small class="text-red-500" *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
+          Username is required (min 3 characters)
+        </small>
+      </div>
+
+      <!-- Email -->
+      <div class="mb-4">
+        <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+        <p-iconField iconPosition="left">
+          <i class="pi pi-envelope"></i>
+          <input 
+            pInputText 
+            id="email" 
+            type="email"
+            formControlName="email"
+            placeholder="Enter email"
+            class="w-full"
+            [class.ng-invalid]="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
+          />
+        </p-iconField>
+        <small class="text-red-500" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+          Valid email is required
+        </small>
+      </div>
+
+      <!-- Password -->
+      <div class="mb-4">
+        <label for="password" class="block text-sm font-semibold mb-2">Password</label>
+        <p-password 
+          id="password"
+          formControlName="password"
+          placeholder="Enter password"
+          [toggleMask]="true"
+          [feedback]="false"
+          class="w-full"
+          [class.ng-invalid]="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
+        ></p-password>
+        <small class="text-red-500" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+          Password is required (min 6 characters)
+        </small>
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="mb-4">
+        <label for="confirmPassword" class="block text-sm font-semibold mb-2">Confirm Password</label>
+        <p-password 
+          id="confirmPassword"
+          formControlName="confirmPassword"
+          placeholder="Confirm password"
+          [toggleMask]="true"
+          [feedback]="false"
+          class="w-full"
+          [class.ng-invalid]="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched"
+        ></p-password>
+        <small class="text-red-500" *ngIf="registrationForm.hasError('passwordMismatch') && registrationForm.get('confirmPassword')?.touched">
+          Passwords do not match
+        </small>
+      </div>
+
+      <!-- Submit Button -->
+      <div class="flex gap-2">
+        <button 
+          pButton 
+          type="submit" 
+          label="Register Account"
+          [loading]="isProcessing"
+          [disabled]="registrationForm.invalid || isProcessing"
+          class="flex-1"
+        ></button>
+        <button 
+          pButton 
+          type="button" 
+          label="Back to Login"
+          severity="secondary"
+          (click)="goToLogin()"
+          class="flex-1"
+        ></button>
+      </div>
+    </form>
+  </p-card>
+</div>

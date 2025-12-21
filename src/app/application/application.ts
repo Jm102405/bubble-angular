@@ -1,0 +1,68 @@
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+import { Drawer as PDrawer } from 'primeng/drawer'
+import { DialogModule as PDialogModule } from 'primeng/dialog';
+import { ButtonModule as PButtonModule } from 'primeng/button';
+import { CardModule as PCardModule } from 'primeng/card';
+import { TabsModule as PTabsModule } from 'primeng/tabs';
+import { PanelModule as PPanelModule } from 'primeng/panel';
+import { FileUploadModule as PFileUploadModule } from 'primeng/fileupload';
+import { DividerModule as PDividerModule } from 'primeng/divider';
+import { TextareaModule as PTextareaModule } from 'primeng/textarea';
+import { InputTextModule as PInputTextModule } from 'primeng/inputtext';
+
+import { Sidebar as LayoutSidebar } from './layout/sidebar/sidebar'
+import { Header as LayoutHeader } from './layout/header/header'
+
+@Component({
+  selector: 'app-application',
+  imports: [
+    RouterOutlet,
+    PDrawer,
+    PDialogModule,
+    PButtonModule,
+    PCardModule,
+    PTabsModule,
+    PPanelModule,
+    PFileUploadModule,
+    PDividerModule,
+    PTextareaModule,
+    PInputTextModule,
+    LayoutSidebar,
+    LayoutHeader
+  ],
+  templateUrl: './application.html',
+  styleUrl: './application.scss',
+})
+export class Application {
+  isSidebarVisible = true;
+  isMobileDrawerVisible = false;
+  isMobile = false;
+
+  isGenerateDialogOpen = false;
+
+  ngOnInit() {
+    this.checkIfMobile();
+    window.addEventListener('resize', this.checkIfMobile.bind(this));
+  }
+
+  checkIfMobile() {
+    this.isMobile = window.innerWidth < 768;
+    if (this.isMobile) {
+      this.isSidebarVisible = false;
+    }
+  }
+
+  toggleSidebar() {
+    if (this.isMobile) {
+      this.isMobileDrawerVisible = !this.isMobileDrawerVisible;
+    } else {
+      this.isSidebarVisible = !this.isSidebarVisible;
+    }
+  }
+
+  generate() {
+    this.isGenerateDialogOpen = true;
+  }
+}
