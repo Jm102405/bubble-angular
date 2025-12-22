@@ -4,7 +4,7 @@
   <p-card class="register-card" header="Create Your Account">
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
       
-        <!-- Profile Image Upload -->
+      <!-- Profile Image Upload -->
       <div class="mb-4 text-center">
         <label class="block text-sm font-semibold mb-2">Profile Picture</label>
         <div class="mb-3">
@@ -84,6 +84,21 @@
         <small class="text-red-500" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
           Valid email is required
         </small>
+      </div>
+
+      <!-- ✅ Role Select (PrimeNG v20) -->
+      <div class="mb-4">
+        <label for="role" class="block text-sm font-semibold mb-2">Role</label>
+        <p-select
+          id="role"
+          formControlName="role"
+          [options]="roleOptions"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select role"
+          class="w-full"
+        ></p-select>
+        <small class="text-muted">Select whether this user will be an Admin or regular User</small>
       </div>
 
       <!-- Password -->

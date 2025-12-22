@@ -1,3 +1,4 @@
+// src/app/application/register/register.ts
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -13,6 +14,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { FileUploadModule } from 'primeng/fileupload';
 import { AvatarModule } from 'primeng/avatar';
+import { SelectModule } from 'primeng/select'; // ✅ Use SelectModule for v20
 
 import { Auth as AuthService } from '../../../services/auth/auth';
 
@@ -31,7 +33,8 @@ import { Auth as AuthService } from '../../../services/auth/auth';
     IconFieldModule,
     InputIconModule,
     FileUploadModule,
-    AvatarModule
+    AvatarModule,
+    SelectModule  // ✅ Use SelectModule instead of DropdownModule
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
@@ -42,6 +45,12 @@ export class Register {
   isProcessing = false;
   profileImagePreview: string | null = null;
   profileImageBase64: string | null = null;
+
+  // ✅ Role options
+  roleOptions = [
+    { label: 'User', value: 'user' },
+    { label: 'Admin', value: 'admin' }
+  ];
 
   constructor(
     private fb: FormBuilder,
@@ -57,7 +66,8 @@ export class Register {
       username: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
-      confirmPassword: ['', Validators.required]
+      confirmPassword: ['', Validators.required],
+      role: ['user', Validators.required] // ✅ Add role field
     }, { validators: this.passwordMatchValidator });
   }
 
@@ -123,7 +133,7 @@ export class Register {
         email: formValue.email,
         password: formValue.password,
         name: formValue.username,
-        role: 'user',
+        role: formValue.role, // ✅ Selected role
         // profileImage: this.profileImageBase64,
       };
 

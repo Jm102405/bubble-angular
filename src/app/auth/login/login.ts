@@ -1,3 +1,4 @@
+// src/app/auth/login/login.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -29,9 +30,7 @@ import { Auth as AuthModel } from '../../../models/auth.model';
   styleUrls: ['./login.scss'],
   providers: [MessageService]
 })
-
 export class Login {
-
   credentials: AuthModel = new AuthModel();
   isProcessing: boolean = false;
 
@@ -39,7 +38,7 @@ export class Login {
     private readonly router: Router,
     private readonly authService: AuthService,
     private messageService: MessageService
-  ) { }
+  ) {}
 
   async login() {
     console.log('login() called, credentials:', this.credentials);
@@ -56,18 +55,15 @@ export class Login {
     this.isProcessing = true;
 
     try {
-      console.log('🚀 About to call ahuthService.login...');
-      console.log('🚀 authService object:', this.authService);
+      console.log('🚀 About to call authService.login...');
       
       const res = await this.authService.login(this.credentials);
       
       console.log('🚀 Got response from authService:', res);
-      const token = res.access_token;
       
-      if (token) {
-        localStorage.setItem('auth_token', token);
-        localStorage.setItem('currentUser', this.credentials.username);
-
+      // ✅ Token is auto-saved by authService.login() - no need to save manually
+      
+      if (res.access_token) {
         this.messageService.add({
           severity: 'success',
           summary: 'Success',
