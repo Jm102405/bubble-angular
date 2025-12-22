@@ -63,6 +63,7 @@ export class Header {
       rejectButtonStyleClass: 'p-button-text p-button-secondary',
       accept: () => {
         // this.authService.logout();
+        localStorage.removeItem('auth_token');
 
         this.messageService.add({
           severity: 'success',
