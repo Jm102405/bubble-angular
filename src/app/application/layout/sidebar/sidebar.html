@@ -8,11 +8,4 @@
   </p-button>
 </div>
 
-<p-menu [model]="menuItems" [style]="{'border':'none', 'background': 'none'}">
-  <ng-template #item let-item>
-    <a pRipple class="flex items-right p-menu-item-link py-2 px-3 hover:surface-200 border-round-3xl" [routerLink]="item.routerLink">
-      <span [class]="item.icon"></span>
-      <span class="ml-2">{{ item.label }}</span>
-    </a>
-  </ng-template>
-</p-menu>
+<p-panelmenu [model]="menuItems" [style]="{'border':'none', 'background': 'none'}"></p-panelmenu>

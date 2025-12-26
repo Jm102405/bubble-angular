@@ -3,7 +3,7 @@ import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { MenuItem as PMenuItem } from 'primeng/api';
-import { MenuModule as PMenuModule } from 'primeng/menu';
+import { PanelMenuModule } from 'primeng/panelmenu'; // ✅ Changed to PanelMenu
 import { ButtonModule as PButtonModule } from 'primeng/button';
 import { ImageModule as PImageModule } from 'primeng/image';
 
@@ -13,7 +13,7 @@ import { Auth as AuthService } from '../../../../services/auth/auth';
   selector: 'app-sidebar',
   imports: [
     RouterModule,
-    PMenuModule,
+    PanelMenuModule, // ✅ Changed
     PButtonModule,
     PImageModule
   ],
@@ -42,12 +42,28 @@ export class Sidebar implements OnInit {
       }
     ];
 
-    // Register - visible to admin only
+    // Admin with submenus - visible to admin only
     if (this.authService.isAdmin()) {
       this.menuItems.push({
-        label: 'Register',
-        icon: 'pi pi-user-plus',
-        routerLink: ['/application/register'],
+        label: 'Admin',
+        icon: 'pi pi-cog',
+        items: [
+          {
+            label: 'Register',
+            icon: 'pi pi-user-plus',
+            routerLink: ['/application/register'],
+          },
+          {
+            label: 'Users',
+            icon: 'pi pi-users',
+            routerLink: ['/application/users'],
+          },
+          {
+            label: 'Settings',
+            icon: 'pi pi-sliders-h',
+            routerLink: ['/application/settings'],
+          }
+        ]
       });
     }
   }
