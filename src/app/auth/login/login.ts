@@ -71,7 +71,7 @@ export class Login {
         });
 
         setTimeout(() => {
-          this.router.navigate(['/application/home']);
+          this.router.navigate(['./application/home']);
         }, 1200);
       }
 
