@@ -1,33 +1,47 @@
 <p-toast></p-toast>
-<div class="auth-body">
-  <p-panel class="border-round-2xl pb-2 w-10 md:w-6 lg:w-4">
-    <div class="text-center">
-      <h1 class="text-3xl font-bold mt-2 mb-2">
-        Dashboard Login
-      </h1>
-      <span>Please login to continue to your application</span>
+
+<div class="auth-page">
+  <!-- Ambient blobs -->
+  <div class="auth-blobs">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+  </div>
+
+  <p-panel class="auth-card">
+    <div class="auth-header">
+      <h1>Welcome Back</h1>
+      <p>Sign in to Bubble & Cuddle</p>
     </div>
-    <br />
-    <div class="grid">
-      <div class="col-12 md:col-12 lg:col-12">
-        <p-iconfield [className]="'border-round-lg'">
-          <input type="text" pInputText placeholder="Username" class="w-full border-round-2xl"
-            [(ngModel)]="credentials.username" [disabled]="isProcessing" />
-        </p-iconfield>
-      </div>
+
+    <div class="auth-form">
+      <p-iconfield>
+        <input
+          type="text"
+          pInputText
+          placeholder="Username"
+          [(ngModel)]="credentials.username"
+          [disabled]="isProcessing"
+        />
+      </p-iconfield>
+
+      <p-iconfield>
+        <input
+          type="password"
+          pPassword
+          class="auth-input"
+          placeholder="Password"
+          [(ngModel)]="credentials.password"
+          [disabled]="isProcessing"
+        />
+      </p-iconfield>
+
+      <p-button
+        label="Sign In"
+        (onClick)="login()"
+        [loading]="isProcessing"
+        [disabled]="isProcessing"
+        styleClass="auth-button"
+      ></p-button>
     </div>
-    <div class="grid">
-      <div class="col-12 md:col-12 lg:col-12">
-        <p-iconfield [className]="'border-round-lg'">
-          <input type="password" pPassword placeholder="Password" class="w-full border-round-2xl"
-            [(ngModel)]="credentials.password" [disabled]="isProcessing" />
-        </p-iconfield>
-      </div>
-    </div>
-    <br />
-    <p-button (onClick)="login()" [label]="'Login'" [rounded]="true" class="" [fluid]="true" [size]="'large'"
-      [disabled]="isProcessing" [loading]="isProcessing" />
-    <br />
-    <p class="text-center text-sm"><strong>Demo:</strong> test / password</p>
   </p-panel>
 </div>

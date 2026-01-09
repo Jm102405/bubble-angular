@@ -1,22 +1,50 @@
 <div class="card">
-  <p-menubar class="border-noround border-none border-bottom-1">
+  <p-menubar class="border-noround border-none">
     <ng-template #start>
-      <p-button [icon]="'pi pi-bars'" [severity]="'secondary'" [variant]="'text'" [rounded]="true"
+      <!-- Burger Menu - Mobile only with BOLD WHITE icon -->
+      <p-button 
+        class="burger-btn"
+        [icon]="'pi pi-bars'" 
+        [severity]="'secondary'" 
+        [variant]="'text'" 
+        [rounded]="true"
         (click)="toggleSidebar()">
       </p-button>
     </ng-template>
+    
     <ng-template #item let-item let-root="root"></ng-template>
+    
     <ng-template #end>
       <div class="user-header">
-        <p-button [icon]="'pi pi-sun'" [severity]="'secondary'" [variant]="'text'" [rounded]="true"
+        <!-- Theme Toggle -->
+        <p-button 
+          [icon]="'pi pi-sun'" 
+          [severity]="'secondary'" 
+          [variant]="'text'" 
+          [rounded]="true"
           (click)="toggleTheme(true)">
         </p-button>
-        <p-avatar shape="circle">
-          <img [src]="photoUrl" alt="User Photo" />
-        </p-avatar>
-        <span class="font-bold">{{ email }}</span>
-        <p-button [className]="'ml-1'" [icon]="'pi pi-power-off'" [severity]="'secondary'" [variant]="'text'"
-          [rounded]="true" (click)="onLogoutClick()">
+        
+        <!-- User Info Section -->
+        <div class="user-info">
+          <div class="user-details">
+            <span class="user-name">{{ userName }}</span>
+            <span class="user-email">{{ email }}</span>
+          </div>
+          <p-avatar shape="circle" size="large">
+            <img [src]="photoUrl" alt="User Photo" />
+          </p-avatar>
+        </div>
+        
+        <!-- Logout Button -->
+        <p-button 
+          label="Logout"
+          icon="pi pi-arrow-right"
+          iconPos="right"
+          [severity]="'danger'"
+          [outlined]="true"
+          [rounded]="true"
+          (click)="onLogoutClick()">
         </p-button>
       </div>
     </ng-template>

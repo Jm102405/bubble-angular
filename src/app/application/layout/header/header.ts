@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
+  standalone: true,
   imports: [
     CommonModule,
     PMenubarModule,
@@ -40,8 +41,9 @@ export class Header {
 
   @Output() onToggleSidebar = new EventEmitter<void>();
 
-  email: string = 'loggedin_email';
-  photoUrl!: SafeUrl;
+  userName: string = 'Jane Doe';
+  email: string = 'user@example.com';
+  photoUrl: SafeUrl = 'https://i.pravatar.cc/150?img=47'; // Random avatar
 
   toggleSidebar() {
     this.onToggleSidebar.emit();
@@ -62,7 +64,6 @@ export class Header {
       rejectLabel: 'Cancel',
       rejectButtonStyleClass: 'p-button-text p-button-secondary',
       accept: () => {
-        // this.authService.logout();
         localStorage.removeItem('auth_token');
 
         this.messageService.add({
@@ -84,5 +85,11 @@ export class Header {
     if (!authToken) {
        this.router.navigate(['/auth/login']);
     }
+    
+    // You can fetch user data from API here
+    // Example:
+    // this.userName = authService.getUserName();
+    // this.email = authService.getUserEmail();
+    // this.photoUrl = authService.getUserPhoto();
   }
 }

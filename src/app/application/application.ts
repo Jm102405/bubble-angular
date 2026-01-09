@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core'; // Add HostListener
 import { RouterOutlet } from '@angular/router';
 
 import { Drawer as PDrawer } from 'primeng/drawer'
@@ -44,13 +44,20 @@ export class Application {
 
   ngOnInit() {
     this.checkIfMobile();
-    window.addEventListener('resize', this.checkIfMobile.bind(this));
+  }
+
+  @HostListener('window:resize', [])
+  onResize() {
+    this.checkIfMobile();
   }
 
   checkIfMobile() {
     this.isMobile = window.innerWidth < 768;
     if (this.isMobile) {
       this.isSidebarVisible = false;
+      this.isMobileDrawerVisible = false; // Close drawer on resize to desktop
+    } else {
+      this.isSidebarVisible = true; // Show sidebar on desktop
     }
   }
 
@@ -65,4 +72,5 @@ export class Application {
   generate() {
     this.isGenerateDialogOpen = true;
   }
+  
 }

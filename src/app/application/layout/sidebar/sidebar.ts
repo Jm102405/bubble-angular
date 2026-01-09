@@ -1,4 +1,3 @@
-// src/app/application/sidebar/sidebar.ts
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
@@ -32,56 +31,48 @@ export class Sidebar implements OnInit {
   }
 
   buildMenu() {
-    // Dashboard with submenus - visible to everyone
+    // Simple flat menu structure to match the design
     this.menuItems = [
       {
         label: 'Dashboard',
-        icon: 'pi pi-home',
-        items: [
-          {
-            label: 'Customer',
-            icon: 'pi pi-users',
-            routerLink: ['/application/customer'],
-          },
-          {
-            label: 'Products',
-            icon: 'pi pi-box',
-            routerLink: ['/application/products'],
-          },
-          {
-            label: 'Sales',
-            icon: 'pi pi-chart-line',
-            routerLink: ['/application/sales'],
-          }
-        ]
-      }
-    ];
-
-    // Admin with submenus - visible to admin only
-   if (this.authService.isAdmin()) {
-  this.menuItems.push({
-    label: 'Admin',
-    icon: 'pi pi-cog',
-    items: [
-      {
-        label: 'Register',
-        icon: 'pi pi-user-plus',
-        routerLink: ['/application/register'],
+        icon: 'pi pi-th-large',
+        routerLink: ['/application/home'],
       },
       {
-        label: 'Users',
-        icon: 'pi pi-user-edit',
-        routerLink: ['/application/users'],
+        label: 'Customer',
+        icon: 'pi pi-users',
+        routerLink: ['/application/customer'],
+      },
+      {
+        label: 'Product',
+        icon: 'pi pi-box',
+        routerLink: ['/application/products'],
+      },
+      {
+        label: 'Sales',
+        icon: 'pi pi-dollar',
+        routerLink: ['/application/sales'],
       },
       {
         label: 'Settings',
-        icon: 'pi pi-sliders-h',
+        icon: 'pi pi-cog',
         routerLink: ['/application/settings'],
       }
-    ]
-  });
-}
+    ];
 
+    // Admin-only menu items
+    if (this.authService.isAdmin()) {
+      this.menuItems.push({
+        label: 'Register',
+        icon: 'pi pi-user-plus',
+        routerLink: ['/application/register'],
+      });
+      this.menuItems.push({
+        label: 'Users',
+        icon: 'pi pi-user-edit',
+        routerLink: ['/application/users'],
+      });
+    }
   }
 
   generate() {

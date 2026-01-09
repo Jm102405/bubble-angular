@@ -1,4 +1,3 @@
-// src/app/auth/login/login.ts
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -10,6 +9,7 @@ import { IconFieldModule } from 'primeng/iconfield';
 import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
+import { PasswordModule } from 'primeng/password';
 
 import { Auth as AuthService } from '../../../services/auth/auth';
 import { Auth as AuthModel } from '../../../models/auth.model';
@@ -24,7 +24,8 @@ import { Auth as AuthModel } from '../../../models/auth.model';
     InputTextModule,
     IconFieldModule,
     ButtonModule,
-    ToastModule
+    ToastModule,
+    PasswordModule
   ],
   templateUrl: './login.html',
   styleUrls: ['./login.scss'],
@@ -59,9 +60,7 @@ export class Login {
       
       const res = await this.authService.login(this.credentials);
       
-      console.log('🚀 Got response from authService:', res);
-      
-      // ✅ Token is auto-saved by authService.login() - no need to save manually
+      console.log('📦 Got response from authService:', res);
       
       if (res.access_token) {
         this.messageService.add({
@@ -76,7 +75,7 @@ export class Login {
       }
 
     } catch (error) {
-      console.error('🚀 Login error caught:', error);
+      console.error('❌ Login error caught:', error);
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
@@ -85,7 +84,7 @@ export class Login {
     } 
     finally {
       this.isProcessing = false;
-      console.log('🚀 Login process finished');
+      console.log('✅ Login process finished');
     }
   }
 }

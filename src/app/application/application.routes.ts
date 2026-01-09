@@ -7,14 +7,14 @@ export const routes: Routes = [{
   component: Application,
   canActivate: [AuthGuard],
   children: [
-    { path: '', redirectTo: '/application/customer', pathMatch: 'full' },
-    {
-      path: "customer",
-      loadComponent: () => import('./customer/customer').then(m => m.Customer)
-    },
+    { path: '', redirectTo: '/application/home', pathMatch: 'full' },
     {
       path: "home",
       loadComponent: () => import('./home/home').then(m => m.Home)
+    },
+    {
+      path: "customer",
+      loadComponent: () => import('./customer/customer').then(m => m.Customer)
     },
     {
       path: "products",

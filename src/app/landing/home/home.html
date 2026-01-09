@@ -1,19 +1,373 @@
-<div class="hero-container">
-    <section class="hero min-h-screen flex items-center justify-start bg-gradient-to-r from-indigo-600 to-purple-600">
-        <div class="p-6 text-left max-w-2xl">
-        <h1 class="text-4xl font-extrabold text-white mb-2">Excitingly Bubbly and Cuddly Holiday</h1>
-        <p class="text-white/90 mb-6">Treat your furry friends to a luxuriously cuddly and joyfully bubbly holiday
-            <br>glow-up! At Cuddle & Bubble, every wash, trim, and pamper session
-            <br> brings out their festive sparkle.</p>
+<!-- PAGE WRAPPER -->
+<div class="min-h-screen bg-black text-white font-sans">
 
-        <!-- PrimeNG button using Tailwind utility classes via styleClass -->
-        <p-button
-            (click)="goToLogin()"
-            [label]="'Get Started'"
-            [icon]="'pi pi-sign-in'"
-            [styleClass]="'w-full sm:w-48 mx-auto bg-white text-indigo-600 font-semibold p-3 rounded-lg'">
-        </p-button>
+ <p-toolbar
+  class="main-nav"
+  [class.scrolled]="scrolled"
+>
+  <div class="p-toolbar-group-left">
+    <span class="font-bold text-pink-500 text-2xl font-extrabold">
+      Bubble & Cuddle
+    </span>
 
+    <button
+      class="mobile-toggle md:hidden"
+      (click)="toggleMenu()"
+    >
+      ☰
+    </button>
+  </div>
+
+  <div
+    class="p-toolbar-group-right nav-menu"
+    [class.open]="menuOpen"
+  >
+    <a
+      class="nav-link"
+      (click)="scrollToSection('about')"
+      [class.active]="activeSection === 'about'"
+    >About</a>
+
+    <a
+      class="nav-link"
+      (click)="scrollToSection('services')"
+      [class.active]="activeSection === 'services'"
+    >Services</a>
+
+    <a
+      class="nav-link"
+      (click)="scrollToSection('testimonials')"
+      [class.active]="activeSection === 'testimonials'"
+    >Testimonials</a>
+
+    <a
+      class="nav-link"
+      (click)="scrollToSection('contact')"
+      [class.active]="activeSection === 'contact'"
+    >Contact</a>
+
+    <a class="nav-link" routerLink="/auth/login">Login</a>
+  </div>
+</p-toolbar>
+
+<!-- HERO SECTION -->
+<section
+  id="home"
+  class="hero-section px-8 py-20 mb-14"
+  style="background-image: url('https://i.ibb.co/4gRRvs2Q/Gemini-Generated-Image-vor6bcvor6bcvor6.png');"
+>
+  <!-- Dark overlay -->
+  <div class="hero-overlay"></div>
+
+  <!-- Content -->
+  <div class="hero-content max-w-2xl text-white">
+    <h1 class="text-6xl font-extrabold leading-tight mb- mt-0">
+      Curating the Ultimate <br/>
+      Luxury Pet Lifestyle.
+    </h1>
+
+    <div style="max-width: 500px; text-align: justify;">
+      <p class="text-gray-300 mb-6">
+        An exquisite journal of indulgence, wellness, and refined living,
+        where every moment whispers care, every detail celebrates comfort 
+        and every experience is a delicate symphony of love and luxury crafted to nurture,
+        delight, and elevate the life of your cherished companion.
+      </p>
+    </div>
+
+    <div class="flex gap-4">
+      <p-button
+        label="Sign In to Bubble"
+        routerLink="/auth/login"
+        styleClass="p-button-rounded bg-pink-500 border-none hover:bg-pink-600"
+      ></p-button>
+    </div>
+  </div>
+</section>
+
+<!-- THE ART OF PAMPERING -->
+<section id="about" class="py-20 px-8 text-center">
+  <h2 class="text-4xl font-bold mb-8">The Art of Pampering</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-8 mt-8">
+    <div>
+      <i class="pi pi-heart text-pink-500 text-4xl mb-4"></i>
+      <h4 class="font-semibold mb-2">Bespoke Grooming Rituals</h4>
+      <p class="text-gray-400 text-sm">
+        Rich text to combine wellness with indulgent grooming rituals.
+      </p>
+    </div>
+
+    <div>
+      <i class="pi pi-star text-pink-500 text-4xl mb-4"></i>
+      <h4 class="font-semibold mb-2">Holistic Wellness Journeys</h4>
+      <p class="text-gray-400 text-sm">
+        Exclusive care to rejuvenate your companion.
+      </p>
+    </div>
+
+    <div>
+      <i class="pi pi-gift text-pink-500 text-4xl mb-4"></i>
+      <h4 class="font-semibold mb-2">Artisanal Pet Essentials</h4>
+      <p class="text-gray-400 text-sm">
+        Premium products crafted for elegance.
+      </p>
+    </div>
+
+    <div>
+      <i class="pi pi-user text-pink-500 text-4xl mb-4"></i>
+      <h4 class="font-semibold mb-2">Private Pet Concierge</h4>
+      <p class="text-gray-400 text-sm">
+        Tailored services for premium pet lifestyles.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- BESPOKE PROCESS -->
+<section id="services" class="py-20 px-8 mb-8 bespoke-process-bg">
+  <div class="process-blobs">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-3"></span>
+  </div>
+
+  <h2 class="text-4xl font-bold text-center mb-16">Our Bespoke Process</h2>
+
+  <div class="vertical-process mt-8">
+    <div class="process-step left">
+      <div class="process-text">
+        A calm, personalized grooming experience designed around your pet’s coat, sensitivities, and comfort.
+      </div>
+      <div class="process-div">
+        <div class="process-icon"></div>
+        <h4>Grooming</h4>
+      </div>
+    </div>
+
+    <div class="process-step right">
+      <div class="process-div">
+        <div class="process-icon"></div>
+        <h4>Boarding</h4>
+      </div>
+      <div class="process-text">
+        A calm, home-like boarding experience for day or overnight stays, 
+        designed to keep your pet relaxed, secure, and well cared for.
+      </div>
+    </div>
+
+    <div class="process-step left">
+      <div class="process-text">
+       A boutique selection of wholesome foods, playful essentials, and stylish outfits for pets who deserve the best.
+      </div>
+      <div class="process-div">
+        <div class="process-icon"></div>
+        <h4>Merchandise</h4>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials" class="testimonial-section relative bg-[#121212]">
+  <div class="testimonial-inner px-8 py-16">
+    <h2 class="text-4xl font-bold text-center mb-10">
+      Our Testimonials
+    </h2>
+
+    <div class="carousel-container">
+      <div class="carousel-viewport">
+        <div class="fade-left"></div>
+        <div class="fade-right"></div>
+      
+        <div class="carousel-wrapper overflow-hidden" #carousel>
+          <div class="testimonial-marquee">
+
+            <!-- SET 1 -->
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                Best grooming for pets. Excellent grooming service—my pet came back looking adorable and clearly well cared for. 
+                The staff was friendly, professional, and made the whole experience stress-free!
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">A</div>
+                <div>
+                  <div class="testimonial-name">Rhez Salmero</div>
+                  <div class="testimonial-role">Local Guide</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                My baby Ysa’s groomer Jhunlee is so knowledgable with the type of cut I requested and followed every detail
+                 I mention not to do, Iam so happy! Plus all the staff are so friendly and accomodating you wouldnt feel unattended or neglected. Kudos to everyone and see you again soon!
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">A</div>
+                <div>
+                  <div class="testimonial-name">Anazelle Gala</div>
+                  <div class="testimonial-role">Baby Ysa’s Owner</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                  We highly recommend Bubble and Cuddle. They are absolutely our new 100% go-to boarding place for our fur-babies.
+                 This awesome establishment deserves the support of all fur-parents! 
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">I</div>
+                <div>
+                  <div class="testimonial-name">Iki Gai</div>
+                  <div class="testimonial-role">Local Guide</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                  Good staff and clean place! 
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">J</div>
+                <div>
+                  <div class="testimonial-name">Johanna Cordisar</div>
+                  <div class="testimonial-role"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SET 2 (DUPLICATE FOR LOOP) -->
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                Best grooming for pets. Excellent grooming service—my pet came back looking adorable and clearly well cared for. 
+                The staff was friendly, professional, and made the whole experience stress-free!
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">R</div>
+                <div>
+                  <div class="testimonial-name">Rhez Salmero</div>
+                  <div class="testimonial-role">Local Guide</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                 My baby Ysa’s groomer Jhunlee is so knowledgable with the type of cut I requested and followed every detail
+                 I mention not to do, Iam so happy! Plus all the staff are so friendly and accomodating you wouldnt feel unattended or neglected. Kudos to everyone and see you again soon!
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">A</div>
+                <div>
+                  <div class="testimonial-name">Anazelle Gala</div>
+                  <div class="testimonial-role">Baby Ysa’s Owner</div>
+                </div>
+              </div>
+            </div>
+
+           <div class="testimonial-card">
+              <p class="testimonial-text">
+                  We highly recommend Bubble and Cuddle. They are absolutely our new 100% go-to boarding place for our fur-babies.
+                  This awesome establishment deserves the support of all fur-parents! 
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">I</div>
+                <div>
+                  <div class="testimonial-name">Iki Gai</div>
+                  <div class="testimonial-role">Local Guide</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                  Good staff and clean place! 
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">J</div>
+                <div>
+                  <div class="testimonial-name">Johanna Cordisar</div>
+                  <div class="testimonial-role"></div>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT SECTION -->
+<section id="contact" class="contact-section py-32 px-8 relative bg-black overflow-hidden">
+  <!-- Ambient glow -->
+  <div class="absolute inset-0 pointer-events-none">
+    <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-pink-500/20 rounded-full blur-[160px]"></div>
+  </div>
+
+  <div class="relative max-w-5xl mx-auto">
+    <h2 class="text-4xl font-bold mb-4 text-center">
+      Begin Your Pet's Journey
+    </h2>
+    <p class="text-gray-400 text-center max-w-xl mx-auto mb-14">
+      An invitation to refined care, indulgent rituals, and a wellness experience
+      crafted exclusively for your companion.
+    </p>
+
+    <div class="contact-grid">
+      <!-- Contact info with QR Code -->
+      <div class="contact-card">
+        <div class="contact-info">
+          <p>📞 +63 966 910 9968</p>
+          <p>
+            📍 Sundance Residences, Banawa Cebu City, Cebu, Philippines
+          </p>
+        </div>
+        
+        <!-- QR Code Section -->
+       <div class="qr-section">
+          <p class="qr-label">Connect with us on Facebook</p>
+          <img 
+            src="assets/images/qrcode_BubbleCuddleFacebookPage.png" 
+            alt="Bubble & Cuddle Facebook Page QR Code" 
+            class="qr-code"
+          />
+          <p class="qr-instruction">Scan to visit our page</p>
+        </div>
+
+      </div>
+
+      <!-- Form card -->
+      <div class="contact-card form">
+        <div class="space-y-4">
+          <input
+            pInputText
+            placeholder="Pet name"
+            class="contact-input"
+          />
+          <input
+            pInputText
+            placeholder="Email"
+            class="contact-input"
+          />
+          <textarea
+            pInputTextarea
+            rows="4"
+            placeholder="Tell us about your companion"
+            class="contact-input"
+          ></textarea>
+
+          <p-button
+            label="Request Consultation"
+            styleClass="p-button-rounded bg-pink-500 border-none hover:bg-pink-600 contact-button"
+          ></p-button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 </div>

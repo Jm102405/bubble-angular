@@ -14,3 +14,38 @@ body {
   margin: 0;
   padding: 0;
 }
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 1000;
+  transition: transform 0.3s ease;
+  
+  // Desktop
+  width: 250px;
+  
+  // Mobile - full width o almost full
+  @media (max-width: 768px) {
+    width: 80%; // o 100% kung gusto nimo full
+  }
+}
+
+// Overlay/backdrop para sa mobile
+.sidebar-overlay {
+  display: none;
+  
+  @media (max-width: 768px) {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+  }
+}
+

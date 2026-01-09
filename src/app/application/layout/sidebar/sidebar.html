@@ -1,5 +1,8 @@
-<div class="text-center">
-  <h2 class="text-5xl font-bold">Bubble & Cuddle</h2>
+<div class="sidebar-header">
+  <h2 class="brand-title">
+    Bubble & <span class="brand-highlight">Cuddle</span>
+  </h2>
+  <p class="brand-subtitle">Admin Dashboard</p>
 </div>
 
 <div class="pt-1 px-1 text-center mb-3">
@@ -9,3 +12,11 @@
 </div>
 
 <p-panelmenu [model]="menuItems" [style]="{'border':'none', 'background': 'none'}"></p-panelmenu>
+
+<div class="sidebar-footer">
+  <div class="help-section">
+    <h4>Need Help?</h4>
+    <p>Check our documentation</p>
+    <p-button label="View Docs" [outlined]="true" [fluid]="true" severity="secondary"></p-button>
+  </div>
+</div>

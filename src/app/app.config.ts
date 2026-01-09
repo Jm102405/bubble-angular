@@ -8,22 +8,23 @@ import Aura from '@primeuix/themes/aura';
 import { definePreset } from '@primeuix/themes';
 
 import { provideHttpClient } from '@angular/common/http';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 const MyPreset = definePreset(Aura, {
   semantic: {
     colorScheme: {
       primary: {
-        50: '{blue.50}',
-        100: '{blue.100}',
-        200: '{blue.200}',
-        300: '{blue.300}',
-        400: '{blue.400}',
-        500: '{blue.500}',
-        600: '{blue.600}',
-        700: '{blue.700}',
-        800: '{blue.800}',
-        900: '{blue.900}',
-        950: '{blue.950}'
+        50: '#fdf2f8',
+        100: '#fce7f3',
+        200: '#fbcfe8',
+        300: '#f9a8d4',
+        400: '#f472b6',
+        500: '#ec4899',
+        600: '#db2777',
+        700: '#be185d',
+        800: '#9f1239',
+        900: '#831843',
+        950: '#500724'
       },
       light: {
         surface: {
@@ -43,18 +44,24 @@ const MyPreset = definePreset(Aura, {
       },
       dark: {
         surface: {
-          0: '#ffffff',
-          50: '{slate.50}',
-          100: '{slate.100}',
-          200: '{slate.200}',
-          300: '{slate.300}',
-          400: '{slate.400}',
-          500: '{slate.500}',
-          600: '{slate.600}',
-          700: '{slate.700}',
-          800: '{slate.800}',
-          900: '{slate.900}',
-          950: '{slate.950}'
+          0: '#121212',
+          50: '#181818',
+          100: '#1e1e1e',
+          200: '#242424',
+          300: '#2a2a2a',
+          400: '#303030',
+          500: '#383838',
+          600: '#424242',
+          700: '#505050',
+          800: '#626262',
+          900: '#7a7a7a',
+          950: '#949494'
+        },
+        primary: {
+          color: '#ec4899',
+          contrastColor: '#ffffff',
+          hoverColor: '#db2777',
+          activeColor: '#be185d'
         }
       }
     }
@@ -76,5 +83,6 @@ export const appConfig: ApplicationConfig = {
       }
     }),
     provideHttpClient(),
+    provideCharts(withDefaultRegisterables()),
   ]
 };

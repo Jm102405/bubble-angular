@@ -1,14 +1,16 @@
 <div class="layout-wrapper">
-  <aside class="desktop-sidebar surface-50" [class.collapsed]="!isSidebarVisible">
+  <aside class="desktop-sidebar">
     <app-sidebar (onClickGenerate)="generate()"></app-sidebar>
   </aside>
+  
   <p-drawer class="mobile-drawer" [(visible)]="isMobileDrawerVisible" [modal]="true" [baseZIndex]="10000">
     <app-sidebar (onClickGenerate)="generate()"></app-sidebar>
   </p-drawer>
 
-  <main class="main-content" [class.shifted]="isSidebarVisible && !isMobile">
+  <main class="main-content">
     <app-header (onToggleSidebar)="toggleSidebar()"></app-header>
-    <div class="p-4">
+    
+    <div class="content-wrapper">
       <router-outlet />
     </div>
   </main>

@@ -1,6 +1,220 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  max-width: 100%;
+  background: #211219;
+}
+
+.sidebar-header {
+  text-align: center;
+  padding: 1.5rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  margin-bottom: 1rem;
+  flex-shrink: 0;
+
+  .brand-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0 0 0.25rem 0;
+    color: #ffffff;
+    word-wrap: break-word;
+
+    .brand-highlight {
+      color: #ec4899;
+    }
+  }
+
+  .brand-subtitle {
+    font-size: 0.875rem;
+    color: #9ca3af;
+    margin: 0;
+    font-weight: 400;
+  }
+}
+
+::ng-deep .p-panelmenu {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  
+  .p-panelmenu-header-link {
+    background: transparent !important;
+    border: none !important;
+    border-radius: 8px !important;
+    margin-bottom: 0.125rem !important;
+    padding: 0.625rem 0.875rem !important;
+    transition: all 0.2s;
+    min-height: auto !important;
+    display: flex !important;
+    align-items: center !important;
+    color: #ffffff !important; // WHITE text
+
+    &:hover {
+      background: rgba(236, 72, 153, 0.1) !important;
+      
+      .p-menuitem-text {
+        color: #ffffff !important;
+      }
+    }
+
+    .p-menuitem-icon {
+      color: #9ca3af !important;
+      margin-right: 0.75rem !important;
+      font-size: 1.1rem !important;
+      display: inline-block !important;
+      width: 1.25rem !important;
+      text-align: center !important;
+      flex-shrink: 0;
+    }
+
+    .p-menuitem-text {
+      color: #ffffff !important; // WHITE text - ADDED
+      font-weight: 500;
+      font-size: 0.9rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+
+  .p-panelmenu-header-link.router-link-active,
+  .p-panelmenu-header-link[aria-expanded="true"] {
+    background: rgba(236, 72, 153, 0.15) !important;
+    
+    .p-menuitem-icon,
+    .p-menuitem-text {
+      color: #ec4899 !important;
+    }
+  }
+
+  .p-panelmenu-panel {
+    background: transparent !important;
+    border: none !important;
+    margin-bottom: 0 !important;
+  }
+
+  .p-panelmenu-content {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .p-toggleable-content {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .p-toggleable-content.p-panelmenu-expanded {
+    height: auto;
+  }
+  
+  .p-menuitem-icon::before {
+    display: inline-block !important;
+  }
+}
+
+.sidebar-footer {
+  margin-top: auto;
+  padding: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  flex-shrink: 0;
+
+  .help-section {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 8px;
+    padding: 1.25rem;
+    text-align: center;
+
+    h4 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 0.25rem 0;
+      color: #ffffff;
+    }
+
+    p {
+      font-size: 0.875rem;
+      color: #9ca3af;
+      margin: 0 0 1rem 0;
+    }
+
+    ::ng-deep .p-button {
+      color: #ffffff !important;
+      border-color: rgba(255, 255, 255, 0.2) !important;
+
+      &:hover {
+        background: rgba(236, 72, 153, 0.1) !important;
+        border-color: #ec4899 !important;
+      }
+    }
+  }
+}
+
 .admin-label {
   margin-bottom: 1px;
   font-weight: lighter;
   font-size: 14px;
   letter-spacing: 1px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0.5rem 0.875rem;
+  color: #9ca3af;
+  text-transform: uppercase;
+}
+
+// Mobile responsive styles
+@media (max-width: 768px) {
+  .sidebar-header {
+    padding: 1rem 0.75rem;
+    
+    .brand-title {
+      font-size: 1.25rem;
+    }
+  }
+
+  ::ng-deep .p-panelmenu {
+    .p-panelmenu-header-link {
+      padding: 0.75rem 0.625rem !important;
+
+      .p-menuitem-text {
+        font-size: 0.85rem;
+        color: #ffffff !important; // ENSURE white on mobile too
+      }
+    }
+  }
+
+  .sidebar-footer {
+    padding: 0.75rem;
+
+    .help-section {
+      padding: 1rem;
+
+      h4 {
+        font-size: 0.9rem;
+      }
+
+      p {
+        font-size: 0.8rem;
+      }
+    }
+  }
+}
+
+// Force white text on all menu items - STRONG OVERRIDE
+::ng-deep {
+  .p-panelmenu .p-menuitem-text,
+  .p-panelmenu .p-menuitem-link-label,
+  .p-panelmenu-header-link span {
+    color: #ffffff !important;
+  }
+  
+  // Active state stays pink
+  .p-panelmenu-header-link.router-link-active .p-menuitem-text,
+  .p-panelmenu-header-link[aria-expanded="true"] .p-menuitem-text {
+    color: #ec4899 !important;
+  }
 }

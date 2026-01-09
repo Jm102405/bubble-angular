@@ -1,16 +1,20 @@
 :host {
   display: block;
   height: 100vh;
+  overflow: hidden;
+  background: #211219;
 }
 
 .layout-wrapper {
-  position: relative;
+  display: flex;
   height: 100vh;
-  overflow-y: auto;
+  overflow: hidden;
+  position: relative;
+  background: #211219;
 }
 
+// Desktop Sidebar - ALWAYS visible on desktop
 .desktop-sidebar {
-  display: block;
   position: fixed;
   top: 0;
   left: 0;
@@ -18,44 +22,123 @@
   height: 100%;
   z-index: 1000;
   padding: 1rem;
-  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
-  transform: translateX(0);
+  overflow-y: auto;
+  overflow-x: hidden;
+  background: #211219 !important;
+  box-shadow: none;
+  display: block;
+  
+  @media (max-width: 768px) {
+    display: none;
+  }
 }
 
-.desktop-sidebar.collapsed {
-  transform: translateX(-100%);
-}
-
+// Mobile Drawer - ONLY visible on mobile
 .mobile-drawer {
   display: none;
+  
+  @media (max-width: 768px) {
+    display: block;
+  }
 }
 
+// EXACT FIX for gray border - Complete drawer override
+::ng-deep {
+  // Main drawer container
+  .p-drawer {
+    background: #211219 !important;
+    border: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+  }
+  
+  // Drawer content - THIS IS THE KEY FIX
+  .p-drawer-content {
+    background: #211219 !important;
+    border: none !important;
+    border-left: none !important;
+    border-right: none !important;
+    border-top: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    outline: none !important;
+    padding: 0 !important;
+  }
+  
+  // Drawer header
+  .p-drawer-header {
+    background: #211219 !important;
+    border: none !important;
+    border-bottom: none !important;
+    padding: 1rem !important;
+  }
+  
+  // Close button styling
+  .p-drawer-close-button {
+    color: #ffffff !important;
+    
+    &:hover {
+      background: rgba(236, 72, 153, 0.1) !important;
+    }
+  }
+  
+  // Drawer mask/overlay
+  .p-drawer-mask {
+    background-color: rgba(0, 0, 0, 0.4) !important;
+  }
+  
+  // Position-specific overrides
+  .p-drawer-left {
+    border-right: none !important;
+    box-shadow: none !important;
+    
+    .p-drawer-content {
+      border-right: none !important;
+    }
+  }
+  
+  .p-drawer-right {
+    border-left: none !important;
+    box-shadow: none !important;
+    
+    .p-drawer-content {
+      border-left: none !important;
+    }
+  }
+  
+  // Component class override
+  .p-drawer.p-component {
+    border: none !important;
+    box-shadow: none !important;
+  }
+}
+
+// Main Content
 .main-content {
-  transition: margin-left 0.3s ease-in-out;
-  margin-left: 0;
-}
-
-.main-content.shifted {
+  flex: 1;
   margin-left: 250px;
+  width: calc(100% - 250px);
+  height: 100vh;
+  max-width: calc(100vw - 250px);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  background: #211219;
+  overflow: hidden;
+  
+  @media (max-width: 768px) {
+    margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+  }
 }
 
-@media (max-width: 768px) {
-  .desktop-sidebar {
-    display: none !important;
-    transform: translateX(-100%) !important;
-  }
-
-  .mobile-drawer {
-    display: block !important;
-  }
-
-  .main-content {
-    margin-left: 0 !important;
-  }
-
-  .main-content.shifted {
-    margin-left: 0 !important;
-  }
-
+// Content Wrapper - Scrolling container
+.content-wrapper {
+  flex: 1;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  background: #211219;
 }
