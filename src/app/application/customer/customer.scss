@@ -1,0 +1,788 @@
+// ===== Theme Colors =====
+$primary-pink: #ec4899;
+$primary-pink-hover: #db2777;
+$primary-pink-light: rgba(236, 72, 153, 0.1);
+$primary-pink-lighter: rgba(236, 72, 153, 0.05);
+
+$text-primary: #ffffff;
+$text-secondary: rgba(255, 255, 255, 0.7);
+$text-muted: rgba(255, 255, 255, 0.5);
+
+$bg-card: rgba(255, 255, 255, 0.05);
+$bg-hover: rgba(255, 255, 255, 0.08);
+$border-color: rgba(255, 255, 255, 0.08);
+
+// ===== Main Card =====
+.card {
+  background: $bg-card;
+  border: 1px solid $border-color;
+  border-radius: 16px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.1);
+  padding: 1.5rem !important;
+
+  // Header styling
+  .mb-4 {
+    h2 {
+      background: linear-gradient(135deg, $text-primary 0%, $primary-pink 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    ::ng-deep .p-button {
+      background: linear-gradient(135deg, $primary-pink 0%, $primary-pink-hover 100%);
+      border: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
+  }
+}
+
+// ===== Table Styling =====
+::ng-deep .p-datatable {
+  background: transparent;
+
+  // Table Header
+  .p-datatable-thead > tr > th {
+    background: transparent;
+    border-bottom: 2px solid $border-color;
+    color: $text-secondary;
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1rem;
+  }
+
+  // Table Body
+  .p-datatable-tbody > tr {
+    background: transparent;
+    transition: all 0.2s ease;
+
+    > td {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      padding: 1rem;
+      color: $text-primary;
+      font-size: 0.95rem;
+    }
+
+    &:hover {
+      background: $bg-hover;
+    }
+  }
+
+  // Paginator
+  .p-paginator {
+    background: transparent;
+    border-top: 1px solid $border-color;
+    padding: 1rem 0 0 0;
+    margin-top: 1rem;
+
+    .p-paginator-current {
+      color: $text-secondary;
+    }
+
+    .p-paginator-pages .p-paginator-page {
+      color: $text-secondary;
+      
+      &.p-highlight {
+        background: $primary-pink;
+        border-color: $primary-pink;
+        color: white;
+      }
+
+      &:hover:not(.p-highlight) {
+        background: $primary-pink-light;
+        color: $primary-pink;
+      }
+    }
+
+    .p-paginator-first,
+    .p-paginator-prev,
+    .p-paginator-next,
+    .p-paginator-last {
+      color: $text-secondary;
+
+      &:hover {
+        background: $primary-pink-light;
+        color: $primary-pink;
+      }
+    }
+  }
+}
+
+// ===== Action Buttons in Table =====
+::ng-deep .p-button.p-button-rounded.p-button-text {
+  transition: all 0.2s ease;
+
+  &:hover {
+    transform: scale(1.1);
+  }
+
+  &.p-button-info:hover {
+    background: rgba(33, 150, 243, 0.1);
+  }
+
+  &.p-button-danger:hover {
+    background: rgba(244, 67, 54, 0.1);
+  }
+}
+
+// ===== Dialog Styling =====
+::ng-deep .p-dialog {
+  .p-dialog-header {
+    background: linear-gradient(135deg, $bg-card 0%, rgba(236, 72, 153, 0.1) 100%);
+    border-bottom: 1px solid $border-color;
+    padding: 1.5rem;
+
+    .p-dialog-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: $text-primary;
+    }
+
+    .p-dialog-header-icons {
+      .p-dialog-header-close {
+        color: $text-secondary;
+
+        &:hover {
+          background: $primary-pink-light;
+          color: $primary-pink;
+        }
+      }
+    }
+  }
+
+  .p-dialog-content {
+    background: transparent;
+    padding: 1.5rem;
+  }
+
+  // Form Fields
+  > div > div {
+    label {
+      display: block;
+      font-weight: 600;
+      font-size: 0.95rem;
+      color: $text-primary;
+      margin-bottom: 0.5rem;
+    }
+
+    small {
+      color: $text-muted;
+      font-size: 0.875rem;
+      font-style: italic;
+    }
+
+    // Input Text Fields
+    .p-inputtext {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid $border-color;
+      border-radius: 8px;
+      color: $text-primary;
+      transition: all 0.3s ease;
+
+      &:focus {
+        border-color: $primary-pink;
+        box-shadow: 0 0 0 3px $primary-pink-light;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      &::placeholder {
+        color: $text-muted;
+      }
+    }
+
+    // Dropdown Fields
+    .p-dropdown {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid $border-color;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        border-color: $primary-pink;
+      }
+
+      &.p-focus {
+        border-color: $primary-pink;
+        box-shadow: 0 0 0 3px $primary-pink-light;
+        background: rgba(255, 255, 255, 0.08);
+      }
+
+      .p-dropdown-label {
+        color: $text-primary;
+
+        &.p-placeholder {
+          color: $text-muted;
+        }
+      }
+
+      .p-dropdown-trigger {
+        color: $text-secondary;
+      }
+    }
+  }
+
+  // Dialog Footer
+  .p-dialog-footer {
+    background: $bg-card;
+    border-top: 1px solid $border-color;
+    padding: 1.5rem;
+
+    .p-button {
+      &.p-button-secondary {
+        border: 1px solid $border-color;
+        color: $text-secondary;
+        background: transparent;
+
+        &:hover {
+          background: $bg-hover;
+          border-color: $text-secondary;
+          color: $text-primary;
+        }
+      }
+
+      &:not(.p-button-secondary) {
+        background: linear-gradient(135deg, $primary-pink 0%, $primary-pink-hover 100%);
+        border: none;
+        color: white;
+        font-weight: 600;
+        box-shadow: 0 4px 12px rgba(236, 72, 153, 0.3);
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 16px rgba(236, 72, 153, 0.4);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+    }
+
+    .mr-2 {
+      margin-right: 0.5rem;
+    }
+  }
+}
+
+// ===== Dropdown Panel (Overlay) =====
+::ng-deep .p-dropdown-panel {
+  background: rgba(30, 30, 30, 0.95);
+  border: 1px solid $border-color;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+
+  .p-dropdown-header {
+    background: transparent;
+    border-bottom: 1px solid $border-color;
+
+    .p-dropdown-filter {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid $border-color;
+      color: $text-primary;
+
+      &:focus {
+        border-color: $primary-pink;
+        box-shadow: 0 0 0 2px $primary-pink-light;
+      }
+    }
+  }
+
+  .p-dropdown-items {
+    .p-dropdown-item {
+      color: $text-primary;
+      transition: all 0.2s ease;
+
+      &:hover {
+        background: $primary-pink-light;
+        color: $primary-pink;
+      }
+
+      &.p-highlight {
+        background: $primary-pink;
+        color: white;
+      }
+    }
+  }
+}
+
+// ===== Responsive =====
+@media (max-width: 768px) {
+  .card {
+    padding: 1rem !important;
+
+    .mb-4 {
+      flex-direction: column !important;
+      align-items: flex-start !important;
+      gap: 1rem;
+
+      h2 {
+        font-size: 1.5rem !important;
+      }
+
+      .p-button {
+        width: 100%;
+      }
+    }
+  }
+
+  ::ng-deep .p-dialog {
+    width: 95% !important;
+    max-width: 95% !important;
+
+    .p-dialog-footer {
+      flex-direction: column;
+
+      .p-button {
+        width: 100%;
+        margin: 0 0 0.5rem 0 !important;
+
+        &:last-child {
+          margin-bottom: 0 !important;
+        }
+      }
+    }
+  }
+
+  ::ng-deep .p-datatable {
+    font-size: 0.875rem;
+
+    .p-datatable-thead > tr > th,
+    .p-datatable-tbody > tr > td {
+      padding: 0.75rem;
+    }
+  }
+}
+
+
+// ===== Dialog Styling =====
+::ng-deep .p-dialog {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  background: #211219;
+  
+  // Dialog Header
+  .p-dialog-header {
+    background: linear-gradient(135deg, rgba(236, 72, 153, 0.15) 0%, rgba(219, 39, 119, 0.1) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem 2rem;
+    backdrop-filter: blur(10px);
+
+    .p-dialog-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      
+      &::before {
+        content: '👤';
+        font-size: 1.75rem;
+      }
+    }
+
+    .p-dialog-header-icons {
+      .p-dialog-header-close {
+        width: 2.5rem;
+        height: 2.5rem;
+        color: rgba(255, 255, 255, 0.7);
+        border-radius: 8px;
+        transition: all 0.2s ease;
+
+        &:hover {
+          background: rgba(236, 72, 153, 0.2);
+          color: #ec4899;
+          transform: rotate(90deg);
+        }
+
+        &:focus {
+          box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+        }
+      }
+    }
+  }
+
+  // Dialog Content
+  .p-dialog-content {
+    background: #211219;
+    padding: 2rem;
+    
+    // Form Container
+    > div {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+
+      // Individual Form Fields
+      > div {
+        display: flex;
+        flex-direction: column;
+        position: relative;
+
+        // Labels
+        label {
+          display: block;
+          font-weight: 600;
+          font-size: 0.95rem;
+          color: rgba(255, 255, 255, 0.9);
+          margin-bottom: 0.5rem;
+          transition: color 0.2s ease;
+          
+          &::after {
+            content: '';
+            display: inline-block;
+            width: 0;
+            height: 2px;
+            background: #ec4899;
+            margin-left: 0.5rem;
+            transition: width 0.3s ease;
+          }
+        }
+
+        // Input Fields
+        .p-inputtext {
+          width: 100%;
+          padding: 0.875rem 1rem;
+          font-size: 1rem;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          color: #ffffff;
+          transition: all 0.3s ease;
+          
+          &::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+            font-style: italic;
+          }
+
+          &:hover {
+            border-color: rgba(236, 72, 153, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+          }
+
+          &:focus {
+            border-color: #ec4899;
+            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+            outline: none;
+          }
+
+          &:focus + label::after {
+            width: 30px;
+          }
+        }
+
+        // Dropdown/Select Fields
+        .p-dropdown {
+          width: 100%;
+          background: rgba(255, 255, 255, 0.05);
+          border: 2px solid rgba(255, 255, 255, 0.1);
+          border-radius: 10px;
+          transition: all 0.3s ease;
+
+          &:hover {
+            border-color: rgba(236, 72, 153, 0.4);
+            background: rgba(255, 255, 255, 0.08);
+          }
+
+          &:not(.p-disabled).p-focus {
+            border-color: #ec4899;
+            box-shadow: 0 0 0 4px rgba(236, 72, 153, 0.15);
+            background: rgba(255, 255, 255, 0.08);
+          }
+
+          .p-dropdown-label {
+            padding: 0.875rem 1rem;
+            color: #ffffff;
+            font-size: 1rem;
+
+            &.p-placeholder {
+              color: rgba(255, 255, 255, 0.4);
+              font-style: italic;
+            }
+          }
+
+          .p-dropdown-trigger {
+            width: 3rem;
+            color: rgba(255, 255, 255, 0.6);
+
+            .p-dropdown-trigger-icon {
+              transition: transform 0.3s ease;
+            }
+          }
+
+          &.p-dropdown-open .p-dropdown-trigger-icon {
+            transform: rotate(180deg);
+          }
+        }
+
+        // Helper Text / Small Tags
+        small {
+          display: flex;
+          align-items: center;
+          gap: 0.375rem;
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 0.8125rem;
+          margin-top: 0.375rem;
+          font-style: italic;
+          
+          &::before {
+            content: 'ℹ️';
+            font-size: 0.875rem;
+          }
+        }
+
+        // Disabled State
+        .p-disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+          
+          &:hover {
+            border-color: rgba(255, 255, 255, 0.1) !important;
+          }
+        }
+      }
+    }
+  }
+
+  // Dialog Footer
+  .p-dialog-footer {
+    background: #211219;
+    border-top: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 1.5rem 2rem;
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    .p-button {
+      padding: 0.75rem 2rem;
+      font-weight: 600;
+      font-size: 0.95rem;
+      border-radius: 10px;
+      transition: all 0.3s ease;
+      min-width: 120px;
+
+      // Cancel Button (Secondary/Outlined)
+      &.p-button-secondary {
+        background: transparent;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: rgba(255, 255, 255, 0.8);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.4);
+          color: #ffffff;
+          transform: translateY(-2px);
+        }
+
+        &:active {
+          transform: translateY(0);
+        }
+      }
+
+      // Save Button (Primary)
+      &:not(.p-button-secondary) {
+        background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        border: none;
+        color: white;
+        box-shadow: 0 4px 14px rgba(236, 72, 153, 0.4);
+        position: relative;
+        overflow: hidden;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 100%;
+          height: 100%;
+          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+          transition: left 0.5s ease;
+        }
+
+        &:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+
+          &::before {
+            left: 100%;
+          }
+        }
+
+        &:active {
+          transform: translateY(0);
+          box-shadow: 0 2px 8px rgba(236, 72, 153, 0.4);
+        }
+      }
+
+      .p-button-icon {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  // Dialog Mask (Background Overlay)
+  &-mask {
+    backdrop-filter: blur(5px);
+    background: rgba(0, 0, 0, 0.6);
+  }
+}
+
+// ===== Dropdown Panel (Overlay) =====
+::ng-deep .p-dropdown-panel {
+  background: #211219;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(10px);
+  margin-top: 0.5rem;
+
+  // Filter Header
+  .p-dropdown-header {
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0.75rem;
+
+    .p-dropdown-filter {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      color: #ffffff;
+      padding: 0.625rem 0.875rem;
+
+      &:focus {
+        border-color: #ec4899;
+        box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.15);
+        outline: none;
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .p-dropdown-filter-icon {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // Dropdown Items
+  .p-dropdown-items-wrapper {
+    max-height: 300px;
+  }
+
+  .p-dropdown-items {
+    padding: 0.5rem;
+
+    .p-dropdown-item {
+      color: rgba(255, 255, 255, 0.9);
+      border-radius: 6px;
+      padding: 0.75rem 1rem;
+      margin-bottom: 0.25rem;
+      transition: all 0.2s ease;
+      cursor: pointer;
+
+      &:hover {
+        background: rgba(236, 72, 153, 0.15);
+        color: #ec4899;
+        transform: translateX(4px);
+      }
+
+      &.p-highlight {
+        background: linear-gradient(135deg, #ec4899 0%, #db2777 100%);
+        color: white;
+        font-weight: 600;
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+
+    .p-dropdown-empty-message {
+      color: rgba(255, 255, 255, 0.5);
+      padding: 1rem;
+      text-align: center;
+      font-style: italic;
+    }
+  }
+}
+
+// ===== Responsive =====
+@media (max-width: 768px) {
+  ::ng-deep .p-dialog {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    margin: 1rem;
+
+    .p-dialog-header {
+      padding: 1.25rem 1.5rem;
+
+      .p-dialog-title {
+        font-size: 1.25rem;
+      }
+    }
+
+    .p-dialog-content {
+      padding: 1.5rem;
+
+      > div > div {
+        label {
+          font-size: 0.875rem;
+        }
+
+        .p-inputtext,
+        .p-dropdown .p-dropdown-label {
+          padding: 0.75rem;
+          font-size: 0.9375rem;
+        }
+      }
+    }
+
+    .p-dialog-footer {
+      padding: 1.25rem 1.5rem;
+      flex-direction: column;
+
+      .p-button {
+        width: 100%;
+        margin: 0 !important;
+
+        &:first-child {
+          margin-bottom: 0.75rem !important;
+        }
+      }
+    }
+  }
+}
+
+// ===== Animation =====
+@keyframes dialogSlideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+::ng-deep .p-dialog {
+  animation: dialogSlideIn 0.3s ease-out;
+}
+

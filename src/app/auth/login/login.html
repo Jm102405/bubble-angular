@@ -8,12 +8,26 @@
   </div>
 
   <p-panel class="auth-card">
+    <!-- Back Button -->
+    <div class="back-button-container">
+      <p-button
+        icon="pi pi-arrow-left"
+        [text]="true"
+        [rounded]="true"
+        styleClass="back-button"
+        (onClick)="goToLanding()"
+        pTooltip="Back to Home"
+        tooltipPosition="right"
+      ></p-button>
+    </div>
+
     <div class="auth-header">
       <h1>Welcome Back</h1>
       <p>Sign in to Bubble & Cuddle</p>
     </div>
 
-    <div class="auth-form">
+    <!-- CHANGED: div to form -->
+    <form class="auth-form" (ngSubmit)="login()">
       <p-iconfield>
         <input
           type="text"
@@ -21,6 +35,8 @@
           placeholder="Username"
           [(ngModel)]="credentials.username"
           [disabled]="isProcessing"
+          name="username"
+          autocomplete="username"
         />
       </p-iconfield>
 
@@ -28,20 +44,23 @@
         <input
           type="password"
           pPassword
+          [feedback]="false"
           class="auth-input"
           placeholder="Password"
           [(ngModel)]="credentials.password"
           [disabled]="isProcessing"
+          name="password"
+          autocomplete="current-password"
         />
       </p-iconfield>
 
       <p-button
         label="Sign In"
-        (onClick)="login()"
+        type="submit"
         [loading]="isProcessing"
         [disabled]="isProcessing"
         styleClass="auth-button"
       ></p-button>
-    </div>
+    </form>
   </p-panel>
 </div>

@@ -10,6 +10,7 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { PasswordModule } from 'primeng/password';
+import { TooltipModule } from 'primeng/tooltip'; // ADD THIS
 
 import { Auth as AuthService } from '../../../services/auth/auth';
 import { Auth as AuthModel } from '../../../models/auth.model';
@@ -25,7 +26,8 @@ import { Auth as AuthModel } from '../../../models/auth.model';
     IconFieldModule,
     ButtonModule,
     ToastModule,
-    PasswordModule
+    PasswordModule,
+    TooltipModule // ADD THIS
   ],
   templateUrl: './login.html',
   styleUrls: ['./login.scss'],
@@ -40,6 +42,11 @@ export class Login {
     private readonly authService: AuthService,
     private messageService: MessageService
   ) {}
+
+  // ADD THIS METHOD
+  goToLanding() {
+    this.router.navigate(['/landing']);
+  }
 
   async login() {
     console.log('login() called, credentials:', this.credentials);

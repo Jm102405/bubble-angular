@@ -1,0 +1,373 @@
+/* Hero Section */
+@media (min-width: 769px) {
+  .hero-section {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    overflow: visible;
+    display: flex;
+    align-items: center;
+    margin: 0 !important;
+    padding: 8rem 2rem 0 2rem !important;
+    border: none !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top, 
+      #121212 0%,
+      rgba(18, 18, 18, 0.95) 5%,
+      rgba(18, 18, 18, 0.85) 15%,
+      rgba(18, 18, 18, 0.55) 50%, 
+      rgba(18, 18, 18, 0.40) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    padding-top: 0;
+    margin-left: 4rem;
+    margin-bottom: 6rem;
+  }
+
+  .hero-heading {
+    text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 
+                 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero-content h1 {
+    font-size: 4.5rem;
+    line-height: 1.2;
+    margin-bottom: 1.5rem;
+    color: #ffffff;
+  }
+
+  .hero-description {
+    max-width: 620px;
+  }
+
+  .hero-content p {
+    font-size: 1.25rem;
+    line-height: 1.6;
+    color: #ffffff;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+    font-weight: 300;
+    text-align: justify;
+  }
+
+  .hero-content .flex {
+    margin-top: 2.5rem;
+  }
+
+  .hero-content ::ng-deep .p-button {
+    padding: 1.25rem 3rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    transition: all 0.3s ease;
+    box-shadow: 0 6px 20px rgba(236, 72, 153, 0.5);
+  }
+
+  .hero-content ::ng-deep .p-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(236, 72, 153, 0.7);
+  }
+}
+
+/* Tablet and Mobile */
+@media (max-width: 768px) {
+  .hero-section {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 100vh;
+    overflow: hidden !important;
+    padding: 6rem 1.5rem 0 1.5rem !important;
+    padding-bottom: 0 !important;
+    display: flex;
+    align-items: flex-start;
+    margin: 0 !important;
+    margin-bottom: 0 !important;
+    border: none !important;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top, 
+      #121212 0%,
+      rgba(18, 18, 18, 0.95) 5%,
+      rgba(18, 18, 18, 0.90) 15%,
+      rgba(18, 18, 18, 0.65) 50%, 
+      rgba(18, 18, 18, 0.50) 100%
+    );
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 3;
+    padding-top: 5rem !important;
+    padding-left: 1.5rem !important;
+    padding-right: 1.5rem !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .hero-heading {
+    text-shadow: 0 3px 10px rgba(0, 0, 0, 0.6), 
+                 0 1px 3px rgba(0, 0, 0, 0.4);
+  }
+
+  .hero-content h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.3 !important;
+    margin-top: 2rem !important;
+    margin-bottom: 1.25rem !important;
+    color: #ffffff !important;
+  }
+
+  .hero-description {
+    margin-bottom: 1.5rem !important;
+  }
+
+  .hero-content p {
+    font-size: 0.95rem !important;
+    line-height: 1.6 !important;
+    color: #ffffff !important;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+    font-weight: 300;
+    text-align: justify;
+  }
+
+  .hero-content .flex {
+    flex-direction: column;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    padding-bottom: 2rem !important;
+  }
+
+  .hero-content ::ng-deep .p-button {
+    width: 100%;
+    padding: 1.125rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    border-radius: 9999px;
+    box-shadow: 0 4px 15px rgba(236, 72, 153, 0.5);
+  }
+
+  .hero-content p-button {
+    width: 100%;
+  }
+}
+
+/* Small Mobile only */
+@media (max-width: 480px) {
+  .hero-section {
+    padding-bottom: 0 !important;
+    overflow: hidden !important;
+  }
+
+  .hero-content {
+    padding-top: 4rem !important;
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    padding-bottom: 0 !important;
+    margin-bottom: 0 !important;
+  }
+
+  .hero-content h1 {
+    font-size: 1.75rem !important;
+    margin-top: 1.5rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  .hero-description {
+    margin-bottom: 1.25rem !important;
+  }
+
+  .hero-content p {
+    font-size: 0.875rem !important;
+    line-height: 1.5 !important;
+    text-align: justify;
+    font-weight: 300;
+  }
+
+  .hero-content .flex {
+    padding-bottom: 1.5rem !important;
+  }
+
+  .hero-content ::ng-deep .p-button {
+    padding: 1rem 1.75rem;
+    font-size: 1rem;
+  }
+}
+
+/* Decorative floating elements */
+.hero-decorations {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.deco-heart {
+  position: absolute;
+  font-size: 2rem;
+  opacity: 0.4;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+  animation: float-decoration 6s ease-in-out infinite;
+}
+
+.deco-1 {
+  top: 10%;
+  left: 10%;
+  animation-delay: 0s;
+}
+
+.deco-2 {
+  top: 15%;
+  right: 20%;
+  font-size: 1.5rem;
+  animation-delay: 0.5s;
+}
+
+.deco-3 {
+  top: 30%;
+  right: 10%;
+  font-size: 2.5rem;
+  animation-delay: 1s;
+}
+
+.deco-4 {
+  top: 50%;
+  left: 15%;
+  animation-delay: 1.5s;
+}
+
+.deco-5 {
+  top: 60%;
+  right: 15%;
+  font-size: 1.8rem;
+  animation-delay: 2s;
+}
+
+.deco-6 {
+  bottom: 30%;
+  left: 20%;
+  font-size: 1.6rem;
+  animation-delay: 2.5s;
+}
+
+.deco-7 {
+  bottom: 20%;
+  right: 25%;
+  animation-delay: 3s;
+}
+
+.deco-8 {
+  bottom: 40%;
+  right: 8%;
+  font-size: 2rem;
+  animation-delay: 3.5s;
+}
+
+.deco-9 {
+  top: 25%;
+  left: 5%;
+  font-size: 1.4rem;
+  animation-delay: 0.8s;
+}
+
+.deco-10 {
+  top: 40%;
+  right: 5%;
+  font-size: 1.7rem;
+  animation-delay: 1.2s;
+}
+
+.deco-11 {
+  top: 70%;
+  left: 8%;
+  font-size: 2.2rem;
+  animation-delay: 1.8s;
+}
+
+.deco-12 {
+  top: 55%;
+  right: 22%;
+  font-size: 1.5rem;
+  animation-delay: 2.2s;
+}
+
+.deco-13 {
+  bottom: 15%;
+  left: 12%;
+  font-size: 1.9rem;
+  animation-delay: 2.8s;
+}
+
+.deco-14 {
+  bottom: 35%;
+  right: 18%;
+  font-size: 1.6rem;
+  animation-delay: 3.2s;
+}
+
+.deco-15 {
+  top: 20%;
+  left: 25%;
+  font-size: 1.8rem;
+  animation-delay: 0.3s;
+}
+
+.deco-16 {
+  bottom: 25%;
+  right: 8%;
+  font-size: 2.1rem;
+  animation-delay: 3.8s;
+}
+
+@keyframes float-decoration {
+  0%, 100% {
+    transform: translateY(0) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateY(-30px) rotate(8deg);
+    opacity: 0.7;
+  }
+}
+
+/* Mobile adjustments for decorations */
+@media (max-width: 768px) {
+  .deco-heart {
+    font-size: 1.5rem;
+    opacity: 0.3;
+    animation: float-decoration 5.5s ease-in-out infinite;
+  }
+}
+
+@media (max-width: 480px) {
+  .deco-heart {
+    font-size: 1.2rem;
+    opacity: 0.25;
+    animation: float-decoration 5s ease-in-out infinite;
+  }
+}
+
+/* Black color for paw prints */
+.deco-paw {
+  filter: grayscale(1) brightness(0) drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+}

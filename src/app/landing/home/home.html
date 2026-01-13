@@ -1,7 +1,7 @@
 <!-- PAGE WRAPPER -->
 <div class="min-h-screen bg-black text-white font-sans">
 
- <p-toolbar
+<p-toolbar
   class="main-nav"
   [class.scrolled]="scrolled"
 >
@@ -53,25 +53,39 @@
 <!-- HERO SECTION -->
 <section
   id="home"
-  class="hero-section px-8 py-20 mb-14"
-  style="background-image: url('https://i.ibb.co/4gRRvs2Q/Gemini-Generated-Image-vor6bcvor6bcvor6.png');"
+  class="hero-section"
+  style="background-image: url('assets/images/heroBackground.png');"
 >
-  <!-- Dark overlay -->
-  <div class="hero-overlay"></div>
 
-  <!-- Content -->
+  <!-- Enhanced overlay for better contrast -->
+  <div class="hero-overlay"></div>
+  <!-- Floating decorations -->
+  <div class="hero-decorations">
+    <div class="deco-heart deco-paw deco-1">🐾</div>
+    <div class="deco-heart deco-2">❤️</div>
+    <div class="deco-heart deco-paw deco-3">🐾</div>
+    <div class="deco-heart deco-4">💕</div>
+    <div class="deco-heart deco-paw deco-5">🐾</div>
+    <div class="deco-heart deco-6">❤️</div>
+    <div class="deco-heart deco-paw deco-7">🐾</div>
+    <div class="deco-heart deco-8">💕</div>
+  </div>
+
+  <!-- Content with better readability -->
   <div class="hero-content max-w-2xl text-white">
-    <h1 class="text-6xl font-extrabold leading-tight mb- mt-0">
+    <h1 class="text-7xl font-extrabold hero-heading">
       Curating the Ultimate <br/>
       Luxury Pet Lifestyle.
     </h1>
 
-    <div style="max-width: 500px; text-align: justify;">
-      <p class="text-gray-300 mb-6">
-        An exquisite journal of indulgence, wellness, and refined living,
-        where every moment whispers care, every detail celebrates comfort 
-        and every experience is a delicate symphony of love and luxury crafted to nurture,
-        delight, and elevate the life of your cherished companion.
+    <!-- Condensed description with better contrast -->
+    <div class="hero-description">
+      <p class="text-white">
+        A refined journal of indulgence and wellness, where every moment celebrates 
+        comfort and every experience elevates your cherished companion's life. This thoughtfully
+         crafted collection stands as more than mere documentation—it is a testament to the extraordinary
+          bond you share, a sanctuary of memories that honors the joy, devotion, and unconditional love that
+           fills each day.
       </p>
     </div>
 
@@ -85,44 +99,47 @@
   </div>
 </section>
 
+
+
 <!-- THE ART OF PAMPERING -->
-<section id="about" class="py-20 px-8 text-center">
-  <h2 class="text-4xl font-bold mb-8">The Art of Pampering</h2>
+<section id="about" class="about-section">
+  <!-- ADD: Animated Blobs -->
+  <div class="about-blobs">
+    <span class="blob blob-1"></span>
+    <span class="blob blob-2"></span>
+  </div>
+  
+  <div class="about-container">
+    <h2 class="about-heading">The Art of Pampering</h2>
 
-  <div class="grid grid-cols-1 md:grid-cols-4 gap-10 mb-8 mt-8">
-    <div>
-      <i class="pi pi-heart text-pink-500 text-4xl mb-4"></i>
-      <h4 class="font-semibold mb-2">Bespoke Grooming Rituals</h4>
-      <p class="text-gray-400 text-sm">
-        Rich text to combine wellness with indulgent grooming rituals.
-      </p>
-    </div>
+    <div class="about-grid">
+      <div class="about-card">
+        <i class="pi pi-heart card-icon"></i>
+        <h4 class="card-title">Bespoke Grooming Rituals</h4>
+        <p class="card-description">
+          Rich text to combine wellness with indulgent grooming rituals.
+        </p>
+      </div>
 
-    <div>
-      <i class="pi pi-star text-pink-500 text-4xl mb-4"></i>
-      <h4 class="font-semibold mb-2">Holistic Wellness Journeys</h4>
-      <p class="text-gray-400 text-sm">
-        Exclusive care to rejuvenate your companion.
-      </p>
-    </div>
+      <div class="about-card">
+        <i class="pi pi-star card-icon"></i>
+        <h4 class="card-title">Holistic Wellness Journeys</h4>
+        <p class="card-description">
+          Exclusive care to rejuvenate your companion.
+        </p>
+      </div>
 
-    <div>
-      <i class="pi pi-gift text-pink-500 text-4xl mb-4"></i>
-      <h4 class="font-semibold mb-2">Artisanal Pet Essentials</h4>
-      <p class="text-gray-400 text-sm">
-        Premium products crafted for elegance.
-      </p>
-    </div>
-
-    <div>
-      <i class="pi pi-user text-pink-500 text-4xl mb-4"></i>
-      <h4 class="font-semibold mb-2">Private Pet Concierge</h4>
-      <p class="text-gray-400 text-sm">
-        Tailored services for premium pet lifestyles.
-      </p>
+      <div class="about-card">
+        <i class="pi pi-gift card-icon"></i>
+        <h4 class="card-title">Artisanal Pet Essentials</h4>
+        <p class="card-description">
+          Premium products crafted for elegance.
+        </p>
+      </div>
     </div>
   </div>
 </section>
+
 
 <!-- BESPOKE PROCESS -->
 <section id="services" class="py-20 px-8 mb-8 bespoke-process-bg">
@@ -136,7 +153,7 @@
   <div class="vertical-process mt-8">
     <div class="process-step left">
       <div class="process-text">
-        A calm, personalized grooming experience designed around your pet’s coat, sensitivities, and comfort.
+        A calm, personalized grooming experience designed around your pet's coat, sensitivities, and comfort.
       </div>
       <div class="process-div">
         <div class="process-icon"></div>
@@ -189,7 +206,7 @@
                 The staff was friendly, professional, and made the whole experience stress-free!
               </p>
               <div class="testimonial-author">
-                <div class="testimonial-avatar">A</div>
+                <div class="testimonial-avatar">R</div>
                 <div>
                   <div class="testimonial-name">Rhez Salmero</div>
                   <div class="testimonial-role">Local Guide</div>
@@ -199,14 +216,14 @@
 
             <div class="testimonial-card">
               <p class="testimonial-text">
-                My baby Ysa’s groomer Jhunlee is so knowledgable with the type of cut I requested and followed every detail
+                My baby Ysa's groomer Jhunlee is so knowledgable with the type of cut I requested and followed every detail
                  I mention not to do, Iam so happy! Plus all the staff are so friendly and accomodating you wouldnt feel unattended or neglected. Kudos to everyone and see you again soon!
               </p>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">A</div>
                 <div>
                   <div class="testimonial-name">Anazelle Gala</div>
-                  <div class="testimonial-role">Baby Ysa’s Owner</div>
+                  <div class="testimonial-role">Baby Ysa's Owner</div>
                 </div>
               </div>
             </div>
@@ -238,7 +255,7 @@
               </div>
             </div>
 
-            <!-- SET 2 (DUPLICATE FOR LOOP) -->
+            <!-- SET 2 (DUPLICATE) -->
             <div class="testimonial-card">
               <p class="testimonial-text">
                 Best grooming for pets. Excellent grooming service—my pet came back looking adorable and clearly well cared for. 
@@ -255,14 +272,70 @@
 
             <div class="testimonial-card">
               <p class="testimonial-text">
-                 My baby Ysa’s groomer Jhunlee is so knowledgable with the type of cut I requested and followed every detail
+                 My baby Ysa's groomer Jhunlee is so knowledgable with the type of cut I requested and followed every detail
                  I mention not to do, Iam so happy! Plus all the staff are so friendly and accomodating you wouldnt feel unattended or neglected. Kudos to everyone and see you again soon!
               </p>
               <div class="testimonial-author">
                 <div class="testimonial-avatar">A</div>
                 <div>
                   <div class="testimonial-name">Anazelle Gala</div>
-                  <div class="testimonial-role">Baby Ysa’s Owner</div>
+                  <div class="testimonial-role">Baby Ysa's Owner</div>
+                </div>
+              </div>
+            </div>
+
+           <div class="testimonial-card">
+              <p class="testimonial-text">
+                  We highly recommend Bubble and Cuddle. They are absolutely our new 100% go-to boarding place for our fur-babies.
+                  This awesome establishment deserves the support of all fur-parents! 
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">I</div>
+                <div>
+                  <div class="testimonial-name">Iki Gai</div>
+                  <div class="testimonial-role">Local Guide</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                  Good staff and clean place! 
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">J</div>
+                <div>
+                  <div class="testimonial-name">Johanna Cordisar</div>
+                  <div class="testimonial-role"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- SET 3 (THIRD DUPLICATE FOR SEAMLESS LOOP) -->
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                Best grooming for pets. Excellent grooming service—my pet came back looking adorable and clearly well cared for. 
+                The staff was friendly, professional, and made the whole experience stress-free!
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">R</div>
+                <div>
+                  <div class="testimonial-name">Rhez Salmero</div>
+                  <div class="testimonial-role">Local Guide</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <p class="testimonial-text">
+                 My baby Ysa's groomer Jhunlee is so knowledgable with the type of cut I requested and followed every detail
+                 I mention not to do, Iam so happy! Plus all the staff are so friendly and accomodating you wouldnt feel unattended or neglected. Kudos to everyone and see you again soon!
+              </p>
+              <div class="testimonial-author">
+                <div class="testimonial-avatar">A</div>
+                <div>
+                  <div class="testimonial-name">Anazelle Gala</div>
+                  <div class="testimonial-role">Baby Ysa's Owner</div>
                 </div>
               </div>
             </div>
@@ -302,7 +375,7 @@
 </section>
 
 <!-- CONTACT SECTION -->
-<section id="contact" class="contact-section py-32 px-8 relative bg-black overflow-hidden">
+<section id="contact" class="contact-section bg-black overflow-hidden">
   <!-- Ambient glow -->
   <div class="absolute inset-0 pointer-events-none">
     <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[520px] h-[520px] bg-pink-500/20 rounded-full blur-[160px]"></div>
@@ -337,35 +410,61 @@
           />
           <p class="qr-instruction">Scan to visit our page</p>
         </div>
-
       </div>
 
-      <!-- Form card -->
+      <!-- FIXED: Added id and name attributes -->
       <div class="contact-card form">
         <div class="space-y-4">
+          <p class="qr-label">Reservation</p>
+          
           <input
+            id="ownerName"
+            name="ownerName"
             pInputText
-            placeholder="Pet name"
+            placeholder="Full name of owner"
+            [(ngModel)]="formData.ownerName"
             class="contact-input"
           />
+          
           <input
+            id="petName"
+            name="petName"
             pInputText
-            placeholder="Email"
+            placeholder="Pet's name"
+            [(ngModel)]="formData.petName"
             class="contact-input"
           />
-          <textarea
-            pInputTextarea
-            rows="4"
-            placeholder="Tell us about your companion"
+          
+          <input
+            id="contactNumber"
+            name="contactNumber"
+            pInputText
+            type="tel"
+            placeholder="Contact number (e.g., 09XX XXX XXXX)"
+            [(ngModel)]="formData.contactNumber"
             class="contact-input"
-          ></textarea>
+            maxlength="11"
+            (input)="validatePhoneNumber($event)"
+          />
+          
+          <input
+            id="preferredDateTime"
+            name="preferredDateTime"
+            type="datetime-local"
+            pInputText
+            [(ngModel)]="formData.preferredDateTime"
+            class="contact-input contact-datetime"
+          />
 
           <p-button
-            label="Request Consultation"
+            label="Request Reservation"
+            (onClick)="submitReservation()"
             styleClass="p-button-rounded bg-pink-500 border-none hover:bg-pink-600 contact-button"
           ></p-button>
         </div>
       </div>
+
+      <p-toast></p-toast>
     </div>
   </div>
 </section>
