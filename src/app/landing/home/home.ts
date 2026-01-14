@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import emailjs from '@emailjs/browser';
 
 import { PanelModule } from 'primeng/panel';
 import { InputTextModule } from 'primeng/inputtext';
@@ -41,10 +42,18 @@ export class Home implements AfterViewInit, OnDestroy {
     preferredDateTime: ''
   };
 
+  // EmailJS Configuration
+  private SERVICE_ID = 'service_y3w3q2k';
+  private TEMPLATE_ID = 'template_6moxbli';
+  private PUBLIC_KEY = 'jrzAbasCfx5Cz9p2u';
+
   constructor(
     private router: Router,
     private messageService: MessageService
-  ) {}
+  ) {
+    // Initialize EmailJS
+    emailjs.init(this.PUBLIC_KEY);
+  }
 
   @ViewChild('carousel', { static: false })
   carousel!: ElementRef<HTMLDivElement>;
@@ -157,7 +166,8 @@ export class Home implements AfterViewInit, OnDestroy {
     this.formData.contactNumber = event.target.value;
   }
 
-  submitReservation() {
+  async submitReservation() {
+    // Validation
     if (!this.formData.ownerName || !this.formData.petName || 
         !this.formData.contactNumber || !this.formData.preferredDateTime) {
       this.messageService.add({
@@ -189,15 +199,61 @@ export class Home implements AfterViewInit, OnDestroy {
       return;
     }
 
-    console.log('Reservation submitted:', this.formData);
-    
-    this.messageService.add({
-      severity: 'success',
-      summary: 'Reservation Submitted',
-      detail: 'We will contact you shortly!'
-    });
+    // Format datetime for email
+    const formattedDateTime = new Date(this.formData.preferredDateTime)
+      .toLocaleString('en-PH', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+      });
 
-    this.resetForm();
+    // Prepare email parameters
+    const templateParams = {
+      owner_name: this.formData.ownerName,
+      pet_name: this.formData.petName,
+      contact_number: this.formData.contactNumber,
+      preferred_datetime: formattedDateTime
+    };
+
+    try {
+      // Show sending message
+      this.messageService.add({
+        severity: 'info',
+        summary: 'Sending',
+        detail: 'Sending your reservation request...'
+      });
+
+      // Send email via EmailJS
+      const response = await emailjs.send(
+        this.SERVICE_ID,
+        this.TEMPLATE_ID,
+        templateParams
+      );
+
+      console.log('Email sent successfully!', response);
+
+      // Show success message
+      this.messageService.add({
+        severity: 'success',
+        summary: 'Reservation Submitted',
+        detail: 'We will contact you shortly!'
+      });
+
+      // Clear form
+      this.resetForm();
+
+    } catch (error: any) {
+      console.error('Failed to send email:', error);
+      
+      this.messageService.add({
+        severity: 'error',
+        summary: 'Error',
+        detail: 'Failed to send reservation. Please try again or contact us directly.'
+      });
+    }
   }
 
   isValidPhilippineNumber(number: string): boolean {

@@ -1,0 +1,249 @@
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem 2rem 1.5rem;
+  background: #211219;
+  
+  .register-card {
+    width: 100%;
+    max-width: 1800px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 1.5rem 30rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    
+    
+    ::ng-deep {
+      .p-card-header {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 1.5rem;
+        font-size: 1.75rem;
+        font-weight: 600;
+        text-align: center;
+      }
+      
+      .p-card-body {
+        padding: 2rem;
+      }
+      
+      .p-card-content {
+        padding: 0;
+      }
+    }
+  }
+  
+  // Form Styling
+  form {
+    .mb-4 {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: #374151;
+    }
+    
+    // Input Fields
+    ::ng-deep {
+      .p-inputtext,
+      .p-password input,
+      .p-select {
+        width: 100%;
+        font-size: 1rem;
+        
+        &.ng-invalid.ng-touched {
+          border-color: #ef4444;
+        }
+      }
+      
+      .p-iconfield {
+        width: 100%;
+        
+        i {
+          color: #9ca3af;
+        }
+      }
+      
+      // Password Field
+      .p-password {
+        width: 100%;
+        
+        input {
+          width: 100%;
+        }
+      }
+      
+      // Select/Dropdown
+      .p-select {
+        width: 100%;
+      }
+    }
+    
+    // Validation Messages
+    small {
+      display: block;
+      margin-top: 0.25rem;
+      font-size: 0.875rem;
+      
+      &.text-red-500 {
+        color: #ef4444;
+      }
+      
+      &.text-muted {
+        color: #6b7280;
+      }
+    }
+  }
+  
+  // Profile Image Section
+  .text-center {
+    text-align: center;
+  }
+  
+  ::ng-deep {
+    .p-avatar {
+      width: 120px;
+      height: 120px;
+      
+      img {
+        object-fit: cover;
+      }
+      
+      &.bg-gray-300 {
+        background-color: #d1d5db;
+        
+        .p-avatar-icon {
+          font-size: 3rem;
+          color: #6b7280;
+        }
+      }
+    }
+    
+    // File Upload Styling
+    .p-fileupload {
+      .p-fileupload-choose {
+        background: #667eea;
+        border-color: #667eea;
+        
+        &:hover {
+          background: #5568d3;
+          border-color: #5568d3;
+        }
+      }
+    }
+  }
+  
+  // Buttons
+  .flex {
+    display: flex;
+    
+    &.gap-2 {
+      gap: 0.5rem;
+    }
+  }
+  
+  .flex-1 {
+    flex: 1;
+  }
+  
+  ::ng-deep {
+    button.p-button {
+      width: 100%;
+      padding: 0.75rem 1.25rem;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      
+      &[type="submit"] {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        border: none;
+        
+        &:hover:not(:disabled) {
+          background: linear-gradient(135deg, #5568d3 0%, #6a3f8f 100%);
+          transform: translateY(-2px);
+          box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        &:disabled {
+          opacity: 0.6;
+          cursor: not-allowed;
+        }
+      }
+      
+      &[severity="secondary"] {
+        background: #6b7280;
+        border-color: #6b7280;
+        
+        &:hover {
+          background: #4b5563;
+          border-color: #4b5563;
+        }
+      }
+      
+      &[severity="danger"] {
+        background: #ef4444;
+        border-color: #ef4444;
+        
+        &:hover {
+          background: #dc2626;
+          border-color: #dc2626;
+        }
+      }
+    }
+  }
+  
+  // Responsive Design
+  @media (max-width: 640px) {
+    padding: 1rem 0.5rem;
+    
+    .register-card {
+      max-width: 100%;
+      
+      ::ng-deep {
+        .p-card-body {
+          padding: 1.5rem 1rem;
+        }
+        
+        .p-card-header {
+          font-size: 1.5rem;
+          padding: 1.25rem;
+        }
+      }
+    }
+    
+    form .mb-4 {
+      margin-bottom: 1.25rem;
+    }
+    
+    ::ng-deep .p-avatar {
+      width: 100px;
+      height: 100px;
+      
+      &.bg-gray-300 .p-avatar-icon {
+        font-size: 2.5rem;
+      }
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .flex.gap-2 {
+      flex-direction: column;
+      
+      button {
+        width: 100%;
+      }
+    }
+  }
+}
+
+// Toast Positioning
+::ng-deep {
+  .p-toast {
+    z-index: 9999;
+  }
+}
