@@ -63,18 +63,20 @@
   }
 
   /* === VERTICAL PROCESS LAYOUT === */
-  .vertical-process {
-    position: relative;
-    max-width: 1000px;
-    margin: 0 auto;
-    z-index: 2;
-  }
+.vertical-process {
+  position: relative;
+  width: min(90%, 1200px);
+  margin: 0 auto;
+  z-index: 2;
+}
+
 
   .process-step {
-    display: flex;
-    align-items: center;
-    margin-bottom: 3rem; /* REDUCED: from 5rem to 3rem */
-    position: relative;
+   display: flex;
+  align-items: center;
+  gap: clamp(2rem, 6vw, 5rem);
+  margin-bottom: clamp(3rem, 6vw, 6rem);
+  position: relative;
     
     &.left {
       justify-content: flex-start;
@@ -102,46 +104,59 @@
         left: 50%;
       }
     }
-    
-    /* Connector Lines */
-    &::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      height: 3px;
-      width: 90px;
-      background: linear-gradient(to right, transparent, #ec4899, transparent);
-      border-radius: 999px;
-      transform: translateY(-50%) scaleX(0);
-      transform-origin: center;
-      opacity: 0;
-      transition: transform 0.9s ease, opacity 0.6s ease;
-    }
+
+    .process-image {
+    max-width: clamp(160px, 18vw, 240px);
+    height: auto;
   }
+    
+
+  }
+
+.process-image {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: contain;
+  display: block;
+  filter: drop-shadow(0 8px 18px rgba(236, 72, 153, 0.35));
+}
+
+
+
+
 
   /* === PROCESS CIRCLES === */
   .process-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 11rem;
-    width: 11rem;
-    background-color: #9f1239;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-    color: white;
-    font-size: 1.65rem;
-    flex-shrink: 0;
-    animation: float 6s ease-in-out infinite;
-    transition: box-shadow 0.8s ease;
-    
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: clamp(7rem, 18vw, 12rem);
+  height: clamp(7rem, 18vw, 12rem);
+
+  background: transparent;
+  border-radius: 0;
+
+  color: white;
+  flex-shrink: 0;
+
+  animation: float 6s ease-in-out infinite;
     h4 {
-      font-size: 1.15rem;
-      font-weight: 600;
-      margin-top: 0.5rem;
+   margin-top: 0.6rem;
+  font-size: clamp(0.85rem, 1.2vw, 1.1rem);
+  font-weight: 600;
+  text-align: center;
     }
   }
+
+  @media (max-width: 768px) {
+  .process-div h4 {
+    font-size: 0.9rem;
+  }
+}
+
 
   .process-step:nth-child(1) .process-div { animation-delay: 0s; }
   .process-step:nth-child(2) .process-div { animation-delay: 1.5s; }
@@ -154,10 +169,10 @@
 
   /* Process Text */
   .process-text {
-    max-width: 320px;
-    font-size: 1.05rem;
-    color: #9ca3af;
-    line-height: 1.7;
+  max-width: clamp(260px, 28vw, 380px);
+  font-size: clamp(0.95rem, 1.1vw, 1.15rem);
+  line-height: 1.7;
+  color: #9ca3af;
   }
 
   /* === SCROLL ANIMATION === */
@@ -167,10 +182,6 @@
       opacity: 1;
     }
     
-    .process-div {
-      box-shadow: 0 0 18px rgba(236, 72, 153, 0.6), 
-                  0 0 30px rgba(236, 72, 153, 0.4);
-    }
   }
 }
 
@@ -291,21 +302,21 @@
   }
 
   .process-div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 8rem !important;
-    width: 8rem !important;
-    background-color: #9f1239;
-    border-radius: 50%;
-    box-shadow: 0 0 20px rgba(236, 72, 153, 0.5);
-    color: white;
-    font-size: 1.15rem !important;
-    flex-shrink: 0;
-    margin: 0 !important;
-    animation: float 6s ease-in-out infinite;
-    transition: box-shadow 0.8s ease;
+ display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  width: clamp(7rem, 18vw, 12rem);
+  height: clamp(7rem, 18vw, 12rem);
+
+  background: transparent;
+  border-radius: 0;
+
+  color: white;
+  flex-shrink: 0;
+
+  animation: float 6s ease-in-out infinite;
     
     h4 {
       font-size: 0.95rem !important;
@@ -331,11 +342,10 @@
     line-height: 1.65;
   }
 
-  .vertical-process.animate {
-    .process-div {
-      box-shadow: 0 0 18px rgba(236, 72, 153, 0.6), 
-                  0 0 30px rgba(236, 72, 153, 0.4);
-    }
+   .process-image {
+    max-width: 110px;
+    margin: 0 auto;
+    filter: drop-shadow(0 8px 18px rgba(236, 72, 153, 0.35));
   }
 }
 
@@ -348,6 +358,11 @@
       font-size: 1.65rem;
       margin-bottom: 2.5rem;
     }
+  }
+
+  .process-image {
+    max-width: 90px;
+    filter: drop-shadow(0 8px 18px rgba(236, 72, 153, 0.35));
   }
 
   .process-step {

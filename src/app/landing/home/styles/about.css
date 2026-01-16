@@ -101,6 +101,7 @@
     top: 15%;
     right: -90px;
     animation-delay: 0s;
+    transform: translateY(999px);
   }
 
   .blob-2 {
