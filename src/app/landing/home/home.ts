@@ -32,14 +32,14 @@ import { AfterViewInit, ElementRef, ViewChild, OnDestroy, HostListener } from '@
   ],
   templateUrl: './home.html',
   styleUrls: ['./home.scss'],
-  providers: [MessageService]
+  providers: [MessageService],
 })
 export class Home implements AfterViewInit, OnDestroy {
   formData = {
     ownerName: '',
     petName: '',
     contactNumber: '',
-    preferredDateTime: ''
+    preferredDateTime: '',
   };
 
   // EmailJS Configuration
@@ -47,10 +47,7 @@ export class Home implements AfterViewInit, OnDestroy {
   private TEMPLATE_ID = 'template_6moxbli';
   private PUBLIC_KEY = 'jrzAbasCfx5Cz9p2u';
 
-  constructor(
-    private router: Router,
-    private messageService: MessageService
-  ) {
+  constructor(private router: Router, private messageService: MessageService) {
     // Initialize EmailJS
     emailjs.init(this.PUBLIC_KEY);
   }
@@ -62,6 +59,7 @@ export class Home implements AfterViewInit, OnDestroy {
   private scrollSpeed = 0.9;
   private isPaused = false;
   private processObserver?: IntersectionObserver;
+  private scrollAnimationObserver?: IntersectionObserver;
   scrolled = false;
   activeSection = '';
   menuOpen = false;
@@ -78,6 +76,7 @@ export class Home implements AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {
     this.startAutoScroll();
     this.initProcessObserver();
+     this.initScrollAnimations(); 
     this.scrollSpy();
   }
 
@@ -98,23 +97,45 @@ export class Home implements AfterViewInit, OnDestroy {
     this.processObserver.observe(process);
   }
 
+  private initScrollAnimations(): void {
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+
+    if (!animatedElements.length) return;
+
+    this.scrollAnimationObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            this.scrollAnimationObserver?.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.15,
+      }
+    );
+
+    animatedElements.forEach((el) => this.scrollAnimationObserver!.observe(el));
+  }
+
   private scrollSpy(): void {
     const sections = document.querySelectorAll('section[id]');
 
     const observer = new IntersectionObserver(
-      entries => {
-        entries.forEach(entry => {
+      (entries) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
             this.activeSection = entry.target.id;
           }
         });
       },
       {
-        rootMargin: '-40% 0px -55% 0px'
+        rootMargin: '-40% 0px -55% 0px',
       }
     );
 
-    sections.forEach(section => observer.observe(section));
+    sections.forEach((section) => observer.observe(section));
   }
 
   private startAutoScroll(): void {
@@ -138,6 +159,7 @@ export class Home implements AfterViewInit, OnDestroy {
   ngOnDestroy(): void {
     cancelAnimationFrame(this.animationId);
     this.processObserver?.disconnect();
+    this.scrollAnimationObserver?.disconnect();
   }
 
   goToLogin() {
@@ -149,7 +171,7 @@ export class Home implements AfterViewInit, OnDestroy {
     if (element) {
       const yOffset = -120;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
-      
+
       window.scrollTo({ top: y, behavior: 'smooth' });
       this.menuOpen = false;
     }
@@ -158,22 +180,26 @@ export class Home implements AfterViewInit, OnDestroy {
   validatePhoneNumber(event: any) {
     const input = event.target.value;
     event.target.value = input.replace(/[^0-9]/g, '');
-    
+
     if (event.target.value.length > 11) {
       event.target.value = event.target.value.slice(0, 11);
     }
-    
+
     this.formData.contactNumber = event.target.value;
   }
 
   async submitReservation() {
     // Validation
-    if (!this.formData.ownerName || !this.formData.petName || 
-        !this.formData.contactNumber || !this.formData.preferredDateTime) {
+    if (
+      !this.formData.ownerName ||
+      !this.formData.petName ||
+      !this.formData.contactNumber ||
+      !this.formData.preferredDateTime
+    ) {
       this.messageService.add({
         severity: 'warn',
         summary: 'Incomplete Form',
-        detail: 'Please fill in all fields'
+        detail: 'Please fill in all fields',
       });
       return;
     }
@@ -182,40 +208,39 @@ export class Home implements AfterViewInit, OnDestroy {
       this.messageService.add({
         severity: 'error',
         summary: 'Invalid Number',
-        detail: 'Please enter a valid Philippine mobile number (09XX XXX XXXX)'
+        detail: 'Please enter a valid Philippine mobile number (09XX XXX XXXX)',
       });
       return;
     }
 
     const selectedDate = new Date(this.formData.preferredDateTime);
     const now = new Date();
-    
+
     if (selectedDate < now) {
       this.messageService.add({
         severity: 'error',
         summary: 'Invalid Date',
-        detail: 'Please select a future date and time'
+        detail: 'Please select a future date and time',
       });
       return;
     }
 
     // Format datetime for email
-    const formattedDateTime = new Date(this.formData.preferredDateTime)
-      .toLocaleString('en-PH', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        hour12: true
-      });
+    const formattedDateTime = new Date(this.formData.preferredDateTime).toLocaleString('en-PH', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit',
+      hour12: true,
+    });
 
     // Prepare email parameters
     const templateParams = {
       owner_name: this.formData.ownerName,
       pet_name: this.formData.petName,
       contact_number: this.formData.contactNumber,
-      preferred_datetime: formattedDateTime
+      preferred_datetime: formattedDateTime,
     };
 
     try {
@@ -223,15 +248,11 @@ export class Home implements AfterViewInit, OnDestroy {
       this.messageService.add({
         severity: 'info',
         summary: 'Sending',
-        detail: 'Sending your reservation request...'
+        detail: 'Sending your reservation request...',
       });
 
       // Send email via EmailJS
-      const response = await emailjs.send(
-        this.SERVICE_ID,
-        this.TEMPLATE_ID,
-        templateParams
-      );
+      const response = await emailjs.send(this.SERVICE_ID, this.TEMPLATE_ID, templateParams);
 
       console.log('Email sent successfully!', response);
 
@@ -239,19 +260,18 @@ export class Home implements AfterViewInit, OnDestroy {
       this.messageService.add({
         severity: 'success',
         summary: 'Reservation Submitted',
-        detail: 'We will contact you shortly!'
+        detail: 'We will contact you shortly!',
       });
 
       // Clear form
       this.resetForm();
-
     } catch (error: any) {
       console.error('Failed to send email:', error);
-      
+
       this.messageService.add({
         severity: 'error',
         summary: 'Error',
-        detail: 'Failed to send reservation. Please try again or contact us directly.'
+        detail: 'Failed to send reservation. Please try again or contact us directly.',
       });
     }
   }
@@ -266,7 +286,7 @@ export class Home implements AfterViewInit, OnDestroy {
       ownerName: '',
       petName: '',
       contactNumber: '',
-      preferredDateTime: ''
+      preferredDateTime: '',
     };
   }
 }

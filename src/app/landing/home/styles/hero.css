@@ -35,7 +35,19 @@
     padding-top: 0;
     margin-left: 4rem;
     margin-bottom: 6rem;
+      animation: heroFade 1.2s ease-out forwards;
   }
+
+  @keyframes heroFade {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
 
   .hero-heading {
     text-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), 
