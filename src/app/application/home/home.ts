@@ -44,6 +44,9 @@ interface RecentOrder {
 })
 export class Home implements OnInit {
   
+  // Add this property for mobile table toggle
+  showFullTable: boolean = false;
+  
   statCards: StatCard[] = [
     {
       icon: 'pi pi-wallet',
@@ -150,5 +153,10 @@ export class Home implements OnInit {
 
   ngOnInit() {
     // Initialize any data fetching here
+  }
+
+  // Add this method for toggling table view
+  toggleTableView(): void {
+    this.showFullTable = !this.showFullTable;
   }
 }

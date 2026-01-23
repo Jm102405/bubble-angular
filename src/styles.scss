@@ -29,7 +29,7 @@ body {
   
   // Mobile - full width o almost full
   @media (max-width: 768px) {
-    width: 80%; // o 100% kung gusto nimo full
+    width: 100%; 
   }
 }
 
@@ -47,6 +47,15 @@ body {
     background: rgba(0, 0, 0, 0.5);
     z-index: 999;
   }
+}
+
+/* Global Fix for Logout Dialog Warning Icon */
+.p-confirmdialog .p-confirm-dialog-icon {
+  color: #ffffff !important;
+}
+
+.p-confirmdialog .pi-exclamation-triangle {
+  color: #ffffff !important;
 }
 
 

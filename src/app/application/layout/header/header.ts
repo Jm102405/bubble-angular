@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+// header.ts - FULL CODE WITH IMAGE FIX
+import { Component, EventEmitter, Output, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { Subscription } from 'rxjs';
 
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { MenubarModule as PMenubarModule } from 'primeng/menubar';
@@ -12,6 +14,7 @@ import { ToastModule as PToastModule } from 'primeng/toast';
 import { ConfirmDialog as PConfirmDialog } from 'primeng/confirmdialog';
 
 import { Router } from '@angular/router';
+import { AuthService } from '../../../../services/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -28,22 +31,87 @@ import { Router } from '@angular/router';
   ],
   templateUrl: './header.html',
   styleUrl: './header.scss',
+  
   providers: [MessageService, ConfirmationService],
 })
-export class Header {
+export class Header implements OnInit, OnDestroy {
+
+  @Output() onToggleSidebar = new EventEmitter<void>();
+
+  userName: string = 'Jane Doe';
+  email: string = 'user@example.com';
+  photoUrl: SafeUrl = 'https://i.pravatar.cc/150?img=47';
+  
+  private userSubscription?: Subscription;
 
   constructor(
     private messageService: MessageService,
     private confirmationService: ConfirmationService,
     private router: Router,
     private sanitizer: DomSanitizer,
+    private authService: AuthService
   ) { }
 
-  @Output() onToggleSidebar = new EventEmitter<void>();
+  ngOnInit() {
+    const authToken = localStorage.getItem('auth_token');
+    if (!authToken) {
+      this.router.navigate(['/auth/login']);
+      return;
+    }
+    
+    // ✅ Subscribe to user data changes
+    this.userSubscription = this.authService.currentUser.subscribe(userData => {
+      if (userData) {
+        this.userName = userData.name || userData.username;
+        this.email = userData.email;
+        
+        // ✅ FIXED: Handle both base64 and URL images
+        if (userData.photoUrl) {
+          if (userData.photoUrl.startsWith('data:image')) {
+            // Base64 image - sanitize it
+            this.photoUrl = this.sanitizer.bypassSecurityTrustUrl(userData.photoUrl);
+          } else {
+            // Regular URL
+            this.photoUrl = userData.photoUrl;
+          }
+        } else {
+          // Default avatar
+          this.photoUrl = 'https://i.pravatar.cc/150?img=47';
+        }
+        
+        console.log('✅ Header - User data loaded:', userData);
+      }
+    });
 
-  userName: string = 'Jane Doe';
-  email: string = 'user@example.com';
-  photoUrl: SafeUrl = 'https://i.pravatar.cc/150?img=47'; // Random avatar
+    // ✅ Fallback - Get user data from localStorage
+    const userData = this.authService.getUserData();
+    if (userData) {
+      this.userName = userData.name || userData.username;
+      this.email = userData.email;
+      
+      // ✅ FIXED: Handle both base64 and URL images
+      if (userData.photoUrl) {
+        if (userData.photoUrl.startsWith('data:image')) {
+          // Base64 image - sanitize it
+          this.photoUrl = this.sanitizer.bypassSecurityTrustUrl(userData.photoUrl);
+        } else {
+          // Regular URL
+          this.photoUrl = userData.photoUrl;
+        }
+      } else {
+        // Default avatar
+        this.photoUrl = 'https://i.pravatar.cc/150?img=47';
+      }
+      
+      console.log('✅ Header - User data from localStorage:', userData);
+    }
+  }
+
+  ngOnDestroy() {
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
+  }
 
   toggleSidebar() {
     this.onToggleSidebar.emit();
@@ -64,7 +132,7 @@ export class Header {
       rejectLabel: 'Cancel',
       rejectButtonStyleClass: 'p-button-text p-button-secondary',
       accept: () => {
-        localStorage.removeItem('auth_token');
+        this.authService.clearUserData();
 
         this.messageService.add({
           severity: 'success',
@@ -78,18 +146,5 @@ export class Header {
         }, 2000);
       },
     });
-  }
-
-  ngOnInit() {
-    const authToken = localStorage.getItem('auth_token');
-    if (!authToken) {
-       this.router.navigate(['/auth/login']);
-    }
-    
-    // You can fetch user data from API here
-    // Example:
-    // this.userName = authService.getUserName();
-    // this.email = authService.getUserEmail();
-    // this.photoUrl = authService.getUserPhoto();
   }
 }

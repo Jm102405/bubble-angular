@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Output, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { RouterModule, Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 import { MenuItem as PMenuItem } from 'primeng/api';
 import { PanelMenuModule } from 'primeng/panelmenu';
@@ -21,58 +22,99 @@ import { Auth as AuthService } from '../../../../services/auth/auth';
 })
 export class Sidebar implements OnInit {
   @Output() onClickGenerate = new EventEmitter<void>();
+  @Output() onMenuItemClick = new EventEmitter<void>();
 
   menuItems: PMenuItem[] = [];
 
-  constructor(private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router
+  ) {}
 
   ngOnInit() {
     this.buildMenu();
+    
+    // Auto-close sidebar on route change (mobile)
+    this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        if (this.isMobile()) {
+          this.onMenuItemClick.emit();
+        }
+      });
   }
 
   buildMenu() {
-    // Simple flat menu structure to match the design
+    // Organized menu structure
     this.menuItems = [
+      // 1. Dashboard
       {
         label: 'Dashboard',
         icon: 'pi pi-th-large',
         routerLink: ['/application/home'],
+        command: () => this.handleMenuClick()
       },
-      {
-        label: 'Customer',
-        icon: 'pi pi-users',
-        routerLink: ['/application/customer'],
-      },
-      {
-        label: 'Product',
-        icon: 'pi pi-box',
-        routerLink: ['/application/products'],
-      },
+      // 2. Sales
       {
         label: 'Sales',
         icon: 'pi pi-dollar',
         routerLink: ['/application/sales'],
+        command: () => this.handleMenuClick()
       },
+      // 3. Product
       {
-        label: 'Settings',
-        icon: 'pi pi-cog',
-        routerLink: ['/application/settings'],
+        label: 'Product',
+        icon: 'pi pi-box',
+        routerLink: ['/application/products'],
+        command: () => this.handleMenuClick()
+      },
+      // 4. Customer
+      {
+        label: 'Customer',
+        icon: 'pi pi-users',
+        routerLink: ['/application/customer'],
+        command: () => this.handleMenuClick()
       }
     ];
 
-    // Admin-only menu items
+    // 5. Register (Admin only)
     if (this.authService.isAdmin()) {
       this.menuItems.push({
         label: 'Register',
         icon: 'pi pi-user-plus',
         routerLink: ['/application/register'],
+        command: () => this.handleMenuClick()
       });
+    }
+
+    // 6. Users (Admin only)
+    if (this.authService.isAdmin()) {
       this.menuItems.push({
         label: 'Users',
         icon: 'pi pi-user-edit',
         routerLink: ['/application/users'],
+        command: () => this.handleMenuClick()
       });
     }
+
+    // 7. Settings (Always visible)
+    this.menuItems.push({
+      label: 'Settings',
+      icon: 'pi pi-cog',
+      routerLink: ['/application/settings'],
+      command: () => this.handleMenuClick()
+    });
+  }
+
+  handleMenuClick() {
+    // Only close sidebar on mobile
+    if (this.isMobile()) {
+      this.onMenuItemClick.emit();
+    }
+  }
+
+  isMobile(): boolean {
+    return window.innerWidth <= 768;
   }
 
   generate() {

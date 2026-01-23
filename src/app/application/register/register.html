@@ -1,3 +1,4 @@
+<!-- register.html - NO TAILWIND VERSION -->
 <div class="register-container">
   <p-toast></p-toast>
   
@@ -5,15 +6,14 @@
     <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
       
       <!-- Profile Image Upload -->
-      <div class="mb-4 text-center">
-        <label class="block text-sm font-semibold mb-2">Profile Picture</label>
-        <div class="mb-3">
+      <div class="form-group profile-upload">
+        <div class="profile-label" role="heading" aria-level="3">Profile Picture</div>
+        <div class="avatar-wrapper">
           <p-avatar 
             *ngIf="profileImagePreview"
             [image]="profileImagePreview"
             size="xlarge"
             shape="circle"
-            class="mb-2"
           ></p-avatar>
           <p-avatar 
             *ngIf="!profileImagePreview"
@@ -29,11 +29,11 @@
           accept="image/*"
           [maxFileSize]="5242880"
           (onSelect)="onFileSelected($event)"
+          (onClear)="onFileClear()"
           [showUploadButton]="false"
           [showCancelButton]="false"
           [auto]="false"
           chooseLabel="Choose Image"
-          class="mb-2"
         ></p-fileUpload>
         <button 
           *ngIf="profileImagePreview"
@@ -43,115 +43,120 @@
           severity="danger"
           size="small"
           (click)="removeProfileImage()"
-          class="mt-2"
+          class="remove-image-btn"
         ></button>
       </div>
       
       <!-- Username -->
-      <div class="mb-4">
-        <label for="username" class="block text-sm font-semibold mb-2">Username</label>
+      <div class="form-group">
+        <label for="username" class="form-label">Username</label>
         <p-iconField iconPosition="left">
-          <i class="pi pi-user"></i>
+          <p-inputIcon styleClass="pi pi-user"></p-inputIcon>
           <input 
             pInputText 
-            id="username" 
+            id="username"
+            name="username"
             formControlName="username"
             placeholder="Enter username"
-            class="w-full"
+            autocomplete="username"
             [class.ng-invalid]="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched"
           />
         </p-iconField>
-        <small class="text-red-500" *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
+        <small class="error-message" *ngIf="registrationForm.get('username')?.invalid && registrationForm.get('username')?.touched">
           Username is required (min 3 characters)
         </small>
       </div>
 
       <!-- Email -->
-      <div class="mb-4">
-        <label for="email" class="block text-sm font-semibold mb-2">Email</label>
+      <div class="form-group">
+        <label for="email" class="form-label">Email</label>
         <p-iconField iconPosition="left">
-          <i class="pi pi-envelope"></i>
+          <p-inputIcon styleClass="pi pi-envelope"></p-inputIcon>
           <input 
             pInputText 
-            id="email" 
+            id="email"
+            name="email"
             type="email"
             formControlName="email"
             placeholder="Enter email"
-            class="w-full"
+            autocomplete="email"
             [class.ng-invalid]="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched"
           />
         </p-iconField>
-        <small class="text-red-500" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
+        <small class="error-message" *ngIf="registrationForm.get('email')?.invalid && registrationForm.get('email')?.touched">
           Valid email is required
         </small>
       </div>
 
-      <!-- ✅ Role Select (PrimeNG v20) -->
-      <div class="mb-4">
-        <label for="role" class="block text-sm font-semibold mb-2">Role</label>
+      <!-- Role Select -->
+      <div class="form-group">
+        <label for="role" class="form-label">Role</label>
         <p-select
-          id="role"
+          inputId="role"
+          name="role"
           formControlName="role"
           [options]="roleOptions"
           optionLabel="label"
           optionValue="value"
           placeholder="Select role"
-          class="w-full"
+          autocomplete="off"
         ></p-select>
-        <small class="text-muted">Select whether this user will be an Admin or regular User</small>
+        <small class="helper-text">Select whether this user will be an Admin or regular User</small>
       </div>
 
       <!-- Password -->
-      <div class="mb-4">
-        <label for="password" class="block text-sm font-semibold mb-2">Password</label>
+      <div class="form-group">
+        <label for="reg-password" class="form-label">Password</label>
         <p-password 
-          id="password"
+          inputId="reg-password"
+          name="password"
           formControlName="password"
           placeholder="Enter password"
           [toggleMask]="true"
           [feedback]="false"
-          class="w-full"
+          autocomplete="new-password"
+          [inputStyle]="{'width': '100%'}"
           [class.ng-invalid]="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched"
         ></p-password>
-        <small class="text-red-500" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
+        <small class="error-message" *ngIf="registrationForm.get('password')?.invalid && registrationForm.get('password')?.touched">
           Password is required (min 6 characters)
         </small>
       </div>
 
       <!-- Confirm Password -->
-      <div class="mb-4">
-        <label for="confirmPassword" class="block text-sm font-semibold mb-2">Confirm Password</label>
+      <div class="form-group">
+        <label for="reg-confirmPassword" class="form-label">Confirm Password</label>
         <p-password 
-          id="confirmPassword"
+          inputId="reg-confirmPassword"
+          name="confirmPassword"
           formControlName="confirmPassword"
           placeholder="Confirm password"
           [toggleMask]="true"
           [feedback]="false"
-          class="w-full"
+          autocomplete="new-password"
+          [inputStyle]="{'width': '100%'}"
           [class.ng-invalid]="registrationForm.get('confirmPassword')?.invalid && registrationForm.get('confirmPassword')?.touched"
         ></p-password>
-        <small class="text-red-500" *ngIf="registrationForm.hasError('passwordMismatch') && registrationForm.get('confirmPassword')?.touched">
+        <small class="error-message" *ngIf="registrationForm.hasError('passwordMismatch') && registrationForm.get('confirmPassword')?.touched">
           Passwords do not match
         </small>
       </div>
 
-      <!-- Submit Button -->
-      <div class="flex gap-2">
+      <!-- Submit Buttons -->
+      <div class="button-group">
         <button 
           pButton 
           type="submit" 
           label="Register Account"
           [loading]="isProcessing"
           [disabled]="registrationForm.invalid || isProcessing"
-          class="flex-1"
         ></button>
         <button 
           pButton 
           type="button" 
-          label="Back to Login"
+          label="Cancel"
           severity="secondary"
-          (click)="goToLogin()"
-          class="flex-1"
+          (click)="goToDashboard()"
         ></button>
       </div>
     </form>

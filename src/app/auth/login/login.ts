@@ -1,3 +1,4 @@
+// login.component.ts - FULL CODE WITH BOTH SERVICES
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { CommonModule } from '@angular/common';
@@ -10,9 +11,10 @@ import { ButtonModule } from 'primeng/button';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { PasswordModule } from 'primeng/password';
-import { TooltipModule } from 'primeng/tooltip'; // ADD THIS
+import { TooltipModule } from 'primeng/tooltip';
 
-import { Auth as AuthService } from '../../../services/auth/auth';
+import { Auth as AuthHttpService } from '../../../services/auth/auth'; // ✅ For HTTP calls
+import { AuthService } from '../../../services/auth/auth.service'; // ✅ NEW: For user data management
 import { Auth as AuthModel } from '../../../models/auth.model';
 
 @Component({
@@ -27,7 +29,7 @@ import { Auth as AuthModel } from '../../../models/auth.model';
     ButtonModule,
     ToastModule,
     PasswordModule,
-    TooltipModule // ADD THIS
+    TooltipModule
   ],
   templateUrl: './login.html',
   styleUrls: ['./login.scss'],
@@ -39,11 +41,11 @@ export class Login {
 
   constructor(
     private readonly router: Router,
-    private readonly authService: AuthService,
+    private readonly authHttpService: AuthHttpService, // ✅ Renamed
+    private readonly authService: AuthService, // ✅ NEW: For user data
     private messageService: MessageService
   ) {}
 
-  // ADD THIS METHOD
   goToLanding() {
     this.router.navigate(['/landing']);
   }
@@ -63,13 +65,26 @@ export class Login {
     this.isProcessing = true;
 
     try {
-      console.log('🚀 About to call authService.login...');
+      console.log('🚀 About to call authHttpService.login...');
       
-      const res = await this.authService.login(this.credentials);
+      const res = await this.authHttpService.login(this.credentials); // ✅ Use authHttpService
       
-      console.log('📦 Got response from authService:', res);
+      console.log('📦 Got response from authHttpService:', res);
       
       if (res.access_token) {
+        // ✅ Save user data using AuthService
+        if (res.user) {
+          this.authService.setUserData({ // ✅ Use authService
+            id: res.user.id,
+            username: res.user.username,
+            name: res.user.name,
+            email: res.user.email,
+            role: res.user.role,
+            photoUrl: res.user.photoUrl || null
+          });
+          console.log('✅ User data saved:', res.user);
+        }
+
         this.messageService.add({
           severity: 'success',
           summary: 'Success',

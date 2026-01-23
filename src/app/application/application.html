@@ -4,7 +4,10 @@
   </aside>
   
   <p-drawer class="mobile-drawer" [(visible)]="isMobileDrawerVisible" [modal]="true" [baseZIndex]="10000">
-    <app-sidebar (onClickGenerate)="generate()"></app-sidebar>
+    <app-sidebar 
+      (onClickGenerate)="generate()"
+      (onMenuItemClick)="closeMobileDrawer()">
+    </app-sidebar>
   </p-drawer>
 
   <main class="main-content">

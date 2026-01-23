@@ -98,7 +98,7 @@
   .hero-section {
     position: relative;
     background-size: cover;
-    background-position: center;
+    background-position: 65% center; /* Adjusted from right center */
     background-repeat: no-repeat;
     min-height: 100vh;
     overflow: hidden !important;
@@ -133,6 +133,8 @@
     padding-right: 1.5rem !important;
     padding-bottom: 0 !important;
     margin-bottom: 0 !important;
+    margin-top: 8rem !important;
+      animation: heroFadeMobile 1.2s ease-out forwards;
     max-width: 100% !important;
   }
 
@@ -146,6 +148,7 @@
     line-height: 1.3 !important;
     margin-top: 2rem !important;
     margin-bottom: 1.25rem !important;
+    margin-left: 2rem !important;
     color: #ffffff !important;
   }
 
@@ -188,6 +191,8 @@
   .hero-section {
     padding-bottom: 0 !important;
     overflow: hidden !important;
+    background-size: cover;
+    background-position: 70% center; /* Slightly more right for smaller screens */
   }
 
   .hero-content {

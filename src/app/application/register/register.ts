@@ -1,5 +1,5 @@
-// src/app/application/register/register.ts
-import { Component } from '@angular/core';
+// src/app/application/register/register.ts - FULL CODE
+import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -12,9 +12,9 @@ import { ToastModule } from 'primeng/toast';
 import { PasswordModule } from 'primeng/password';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
-import { FileUploadModule } from 'primeng/fileupload';
+import { FileUpload, FileUploadModule } from 'primeng/fileupload';
 import { AvatarModule } from 'primeng/avatar';
-import { SelectModule } from 'primeng/select'; // ✅ Use SelectModule for v20
+import { SelectModule } from 'primeng/select';
 
 import { Auth as AuthService } from '../../../services/auth/auth';
 
@@ -34,7 +34,7 @@ import { Auth as AuthService } from '../../../services/auth/auth';
     InputIconModule,
     FileUploadModule,
     AvatarModule,
-    SelectModule  // ✅ Use SelectModule instead of DropdownModule
+    SelectModule
   ],
   templateUrl: './register.html',
   styleUrl: './register.scss',
@@ -46,7 +46,8 @@ export class Register {
   profileImagePreview: string | null = null;
   profileImageBase64: string | null = null;
 
-  // ✅ Role options
+  @ViewChild(FileUpload) fileUpload!: FileUpload; // ✅ Reference to FileUpload
+
   roleOptions = [
     { label: 'User', value: 'user' },
     { label: 'Admin', value: 'admin' }
@@ -67,7 +68,7 @@ export class Register {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       confirmPassword: ['', Validators.required],
-      role: ['user', Validators.required] // ✅ Add role field
+      role: ['user', Validators.required]
     }, { validators: this.passwordMatchValidator });
   }
 
@@ -88,6 +89,7 @@ export class Register {
         summary: 'Error',
         detail: 'Please select a valid image file'
       });
+      event.currentFiles = []; // ✅ Clear files
       return;
     }
 
@@ -97,6 +99,7 @@ export class Register {
         summary: 'Error',
         detail: 'Image size must be less than 5MB'
       });
+      event.currentFiles = []; // ✅ Clear files
       return;
     }
 
@@ -104,13 +107,30 @@ export class Register {
     reader.onload = (e: any) => {
       this.profileImageBase64 = e.target.result;
       this.profileImagePreview = e.target.result;
+      
+      // ✅ Clear the upload queue after reading
+      setTimeout(() => {
+        if (this.fileUpload) {
+          this.fileUpload.clear();
+        }
+      }, 100);
     };
     reader.readAsDataURL(file);
+  }
+
+  // ✅ NEW: Handle file clear event
+  onFileClear() {
+    // Don't clear preview/base64 here, only when user clicks "Remove Image"
   }
 
   removeProfileImage() {
     this.profileImagePreview = null;
     this.profileImageBase64 = null;
+    
+    // ✅ Clear the file upload component
+    if (this.fileUpload) {
+      this.fileUpload.clear();
+    }
   }
 
   async onSubmit() {
@@ -133,8 +153,8 @@ export class Register {
         email: formValue.email,
         password: formValue.password,
         name: formValue.username,
-        role: formValue.role, // ✅ Selected role
-        // profileImage: this.profileImageBase64,
+        role: formValue.role,
+        profileImage: this.profileImageBase64,
       };
 
       console.log('🟢 Sending register payload to backend:', payload);
@@ -170,4 +190,7 @@ export class Register {
   goToLogin() {
     this.router.navigate(['/auth/login']);
   }
+
+  goToDashboard() {
+  this.router.navigate(['/application/home']);}
 }

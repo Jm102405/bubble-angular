@@ -18,6 +18,7 @@
     </div>
   </div>
 
+
   <!-- Chart and CTA Row -->
   <div class="chart-row">
     
@@ -40,6 +41,7 @@
       </div>
     </div>
 
+
     <!-- New Product CTA Card -->
     <div class="cta-card">
       <div class="cta-icon">
@@ -50,19 +52,37 @@
       <p-button label="Add Product" icon="pi pi-plus"></p-button>
     </div>
 
+
   </div>
 
-  <!-- Recent Orders Table - FIXED VERSION -->
-  <div class="orders-card">
+
+  <!-- Recent Orders Table - MOBILE RESPONSIVE VERSION -->
+  <div class="orders-card" [class.expanded]="showFullTable">
     <div class="orders-header">
       <h3>Recent Orders</h3>
-      <p-button label="See all" [text]="true" severity="secondary"></p-button>
+      <p-button 
+        [label]="showFullTable ? 'Show less' : 'See all'" 
+        [text]="true" 
+        severity="secondary"
+        (onClick)="toggleTableView()">
+      </p-button>
     </div>
     
-    <!-- Add wrapper for horizontal scroll -->
     <div class="table-wrapper">
-      <p-table [value]="recentOrders" [tableStyle]="{'min-width': '600px'}">
-        <ng-template #header>
+      <!-- Mobile Simplified View (Customer names only) -->
+      <div class="mobile-simple-view" *ngIf="!showFullTable">
+        <div class="customer-item" *ngFor="let order of recentOrders">
+          <p-avatar [label]="order.customer.charAt(0)" shape="circle" size="normal"></p-avatar>
+          <span>{{ order.customer }}</span>
+        </div>
+      </div>
+
+      <!-- Full Table View (All columns) -->
+      <p-table 
+        [value]="recentOrders" 
+        [tableStyle]="{'min-width': '600px'}"
+        [class.mobile-hidden]="!showFullTable">
+        <ng-template pTemplate="header">
           <tr>
             <th class="col-order-id">Order ID</th>
             <th class="col-customer">Customer</th>
@@ -71,7 +91,7 @@
             <th class="col-amount">Amount</th>
           </tr>
         </ng-template>
-        <ng-template #body let-order>
+        <ng-template pTemplate="body" let-order>
           <tr>
             <td class="col-order-id">{{ order.orderId }}</td>
             <td class="col-customer">
@@ -90,5 +110,6 @@
       </p-table>
     </div>
   </div>
+
 
 </div>

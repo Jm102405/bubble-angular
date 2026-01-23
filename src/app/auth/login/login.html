@@ -1,3 +1,4 @@
+<!-- login.html - FULL CODE WITH SCREEN-READER-ONLY LABELS -->
 <p-toast></p-toast>
 
 <div class="auth-page">
@@ -26,33 +27,41 @@
       <p>Sign in to Bubble & Cuddle</p>
     </div>
 
-    <!-- CHANGED: div to form -->
+    <!-- Form with screen-reader-only labels -->
     <form class="auth-form" (ngSubmit)="login()">
-      <p-iconfield>
-        <input
-          type="text"
-          pInputText
-          placeholder="Username"
-          [(ngModel)]="credentials.username"
-          [disabled]="isProcessing"
-          name="username"
-          autocomplete="username"
-        />
-      </p-iconfield>
+      <div>
+        <label for="username" class="sr-only">Username</label>
+        <p-iconfield>
+          <input
+            type="text"
+            pInputText
+            id="username"
+            placeholder="Username"
+            [(ngModel)]="credentials.username"
+            [disabled]="isProcessing"
+            name="username"
+            autocomplete="username"
+          />
+        </p-iconfield>
+      </div>
 
-      <p-iconfield>
-        <input
-          type="password"
-          pPassword
-          [feedback]="false"
-          class="auth-input"
-          placeholder="Password"
-          [(ngModel)]="credentials.password"
-          [disabled]="isProcessing"
-          name="password"
-          autocomplete="current-password"
-        />
-      </p-iconfield>
+      <div>
+        <label for="password" class="sr-only">Password</label>
+        <p-iconfield>
+          <input
+            type="password"
+            pPassword
+            id="password"
+            [feedback]="false"
+            class="auth-input"
+            placeholder="Password"  
+            [(ngModel)]="credentials.password"
+            [disabled]="isProcessing"
+            name="password"
+            autocomplete="current-password"
+          />
+        </p-iconfield>
+      </div>
 
       <p-button
         label="Sign In"
