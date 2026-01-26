@@ -1,4 +1,4 @@
-// src/services/auth/auth.ts - UPDATED FOR RAILWAY
+// src/services/auth/auth.ts
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { firstValueFrom } from 'rxjs';
@@ -21,8 +21,7 @@ type JwtPayload = {
   providedIn: 'root',
 })
 export class Auth {
-  // ✅ UPDATED: Railway production URL
-  private apiUrl = 'https://bubble-nestjs-production.up.railway.app/api/auth';
+  private apiUrl = 'http://localhost:3000/api/auth';
   private storageKey = 'auth_token';
 
   constructor(private http: HttpClient) {}
